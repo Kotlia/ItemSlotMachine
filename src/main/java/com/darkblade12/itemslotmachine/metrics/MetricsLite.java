@@ -43,7 +43,6 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -403,7 +402,7 @@ public class MetricsLite {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         try (GZIPOutputStream gzos = new GZIPOutputStream(baos)) {
-            gzos.write(input.getBytes(StandardCharsets.UTF_8));
+            gzos.write(input.getBytes("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -511,6 +510,6 @@ public class MetricsLite {
      * @return the encoded text, as UTF-8
      */
     private static String urlEncode(String text) throws UnsupportedEncodingException {
-        return URLEncoder.encode(text, StandardCharsets.UTF_8);
+        return URLEncoder.encode(text, "UTF-8");
     }
 }
