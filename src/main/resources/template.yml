@@ -165,8 +165,8 @@ Money_Pot_Settings:
     # This is a list of combos which will are if 'Enabled' is set to true
     # An item id will match everything if it's set to 0
     # Item format: <item_id/item_name> OR <item_id/item_name>-<data>
-    # Valid action names: MULTIPLY_POT_AND_DISTRIBUTE, ADD_TO_POT_AND_DISTRIBUTE, DISTRIBUTE_POT, DISTRIBUTE_INDEPENDANT_MONEY
-    # The amount value can either be a point number or a normal number and is only necessary for the actions MULTIPLY_POT_AND_DISTRIBUTE, ADD_TO_POT_AND_DISTRIBUTE and DISTRIBUTE_INDEPENDANT_MONEY
+    # Valid action names: MULTIPLY_POT_AND_DISTRIBUTE, ADD_TO_POT_AND_DISTRIBUTE, DISTRIBUTE_POT, DISTRIBUTE_INDEPENDENT_MONEY
+    # The amount value can either be a point number or a normal number and is only necessary for the actions MULTIPLY_POT_AND_DISTRIBUTE, ADD_TO_POT_AND_DISTRIBUTE and DISTRIBUTE_INDEPENDENT_MONEY
     # Combo format: <item>@<item>@<item>#<action> OR <item>@<item>@<item>#<action>#<amount>
     # Format: <combo>(;<combo>...)
     #Combos: 279@279@279#MULTIPLY_POT_AND_DISTRIBUTE#2.0
@@ -211,8 +211,8 @@ Item_Pot_Settings:
     # This is a list of combos which are active if 'Enabled' is set to true
     # An item id will match everything if it's set to 0
     # Item format: <item_id/item_name> OR <item_id/item_name>-<data> (OR <item_id/item_name>-<amount>-<data> for the items value)
-    # Valid action names: DOUBLE_POT_ITEMS_AND_DISTRIBUTE, ADD_TO_POT_AND_DISTRIBUTE, DISTRIBUTE_POT, DISTRIBUTE_INDEPENDANT_ITEMS
-    # The items value can either be a point number or a normal number and is only necessary for the actions ADD_TO_POT_AND_DISTRIBUTE and DISTRIBUTE_INDEPENDANT_ITEMS
+    # Valid action names: DOUBLE_POT_ITEMS_AND_DISTRIBUTE, ADD_TO_POT_AND_DISTRIBUTE, DISTRIBUTE_POT, DISTRIBUTE_INDEPENDENT_ITEMS
+    # The items value can either be a point number or a normal number and is only necessary for the actions ADD_TO_POT_AND_DISTRIBUTE and DISTRIBUTE_INDEPENDENT_ITEMS
     # Combo format: <item>@<item>@<item>#<action> OR <item>@<item>@<item>#<action>#<items>
     # Format: <combo>(;<combo>...)
     #Combos: 279@279@279#ADD_TO_POT_AND_DISTRIBUTE#264-3, 267-1, 19-20

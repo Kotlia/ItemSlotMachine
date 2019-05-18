@@ -9,7 +9,7 @@ public abstract class Combo {
     private final ItemStack[] icons;
     protected Action action;
 
-    public Combo(ItemStack[] icons, Action action) {
+    protected Combo(ItemStack[] icons, Action action) {
         if (icons.length != 3) {
             throw new IllegalArgumentException("The icons array has an invalid length (not 3)");
         }

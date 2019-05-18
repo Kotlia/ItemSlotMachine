@@ -55,8 +55,8 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
     @Override
     public void onDisable() {
         unregisterAll();
-        for (int i = 0; i < slotMachines.size(); i++) {
-            slotMachines.get(i).deactivate();
+        for (SlotMachine slotMachine : slotMachines) {
+            slotMachine.deactivate();
         }
     }
 
@@ -80,7 +80,7 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
     }
 
     private void sort() {
-        Collections.sort(slotMachines, comparator);
+        slotMachines.sort(comparator);
     }
 
     private void loadSlotMachines() {
@@ -118,8 +118,7 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
     }
 
     private void deactivateUsed(Player p) {
-        for (int i = 0; i < slotMachines.size(); i++) {
-            SlotMachine s = slotMachines.get(i);
+        for (SlotMachine s : slotMachines) {
             if (s.isUser(p)) {
                 s.deactivate();
             }
@@ -157,9 +156,8 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
         return slotMachines.get(name);
     }
 
-    public SlotMachine getSlotMachine(Location l) {
-        for (int i = 0; i < slotMachines.size(); i++) {
-            SlotMachine s = slotMachines.get(i);
+    private SlotMachine getSlotMachine(Location l) {
+        for (SlotMachine s : slotMachines) {
             if (s.isInsideRegion(l)) {
                 return s;
             }
@@ -168,8 +166,7 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
     }
 
     private SlotMachine getInteractedSlotMachine(Location l) {
-        for (int i = 0; i < slotMachines.size(); i++) {
-            SlotMachine s = slotMachines.get(i);
+        for (SlotMachine s : slotMachines) {
             if (s.hasInteracted(l)) {
                 return s;
             }
@@ -187,8 +184,7 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
 
     private int getActivatedAmount(Player p) {
         int a = 0;
-        for (int i = 0; i < slotMachines.size(); i++) {
-            SlotMachine s = slotMachines.get(i);
+        for (SlotMachine s : slotMachines) {
             if (s.isUser(p) && s.isActive()) {
                 a++;
             }
@@ -198,10 +194,10 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
 
     public List<SlotMachineStatistic> getTop(Type t) {
         List<SlotMachineStatistic> top = new ArrayList<>();
-        for (int i = 0; i < slotMachines.size(); i++) {
-            top.add(slotMachines.get(i).getStatistic());
+        for (SlotMachine slotMachine : slotMachines) {
+            top.add(slotMachine.getStatistic());
         }
-        Collections.sort(top, new StatisticComparator(t));
+        top.sort(new StatisticComparator(t));
         return top;
     }
 
@@ -300,7 +296,7 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player p = event.getPlayer();
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            ItemStack h = p.getItemInHand();
+            ItemStack h = p.getInventory().getItemInMainHand();
             Location l = event.getClickedBlock().getLocation();
             SlotMachine s = getSlotMachine(l);
             if (h.getType() == Material.WATER_BUCKET || h.getType() == Material.LAVA_BUCKET) {

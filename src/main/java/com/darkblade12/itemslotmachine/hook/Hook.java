@@ -6,9 +6,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class Hook<P extends JavaPlugin> {
 
-    protected P plugin;
+    private P plugin;
     private static boolean ENABLED;
 
+    @SuppressWarnings("unchecked")
     public boolean load() {
         Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin(getPluginName());
         if (plugin != null) {
@@ -20,7 +21,7 @@ public abstract class Hook<P extends JavaPlugin> {
 
     protected abstract boolean initialize();
 
-    public abstract String getPluginName();
+    protected abstract String getPluginName();
 
     public P getPlugin() {
         return plugin;

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public final class VaultHook extends Hook<Vault> {
 
     public static Economy ECONOMY;
-    public static Permission PERMISSION;
+    private static Permission PERMISSION;
 
     @Override
     protected boolean initialize() {
@@ -21,14 +21,6 @@ public final class VaultHook extends Hook<Vault> {
     @SuppressWarnings("deprecation")
     public static double getBalance(Player p) {
         return ECONOMY == null ? 0 : ECONOMY.getBalance(p.getName());
-    }
-
-    public static String getGroup(Player p) {
-        try {
-            return PERMISSION == null ? "Default" : PERMISSION.getPrimaryGroup(p);
-        } catch (Exception e) {
-            return "Default";
-        }
     }
 
     @Override

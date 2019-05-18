@@ -1,6 +1,7 @@
 package com.darkblade12.itemslotmachine.reader;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
@@ -22,7 +23,7 @@ public final class CompressedStringReader extends FileReader {
             b.write(buffer, 0, len);
         }
         i.close();
-        return new String(b.toByteArray(), "UTF-8");
+        return new String(b.toByteArray(), StandardCharsets.UTF_8);
     }
 
     public boolean saveToFile(String s) {
@@ -31,7 +32,7 @@ public final class CompressedStringReader extends FileReader {
         }
         try {
             OutputStream out = new DeflaterOutputStream(new FileOutputStream(outputFile));
-            out.write(s.getBytes("UTF-8"));
+            out.write(s.getBytes(StandardCharsets.UTF_8));
             out.flush();
             out.close();
             return true;

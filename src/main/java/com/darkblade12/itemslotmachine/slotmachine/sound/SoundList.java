@@ -4,7 +4,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public final class SoundList extends ArrayList<SoundData> {
 
@@ -13,10 +12,6 @@ public final class SoundList extends ArrayList<SoundData> {
 
     private SoundList() {
         super();
-    }
-
-    public SoundList(Collection<SoundData> c) {
-        super(c);
     }
 
     public static SoundList fromString(String s) throws IllegalArgumentException {
@@ -31,29 +26,25 @@ public final class SoundList extends ArrayList<SoundData> {
     }
 
     public void play(Location l) {
-        for (int i = 0; i < size(); i++) {
-            get(i).play(l);
+        for (SoundData soundData : this) {
+            soundData.play(l);
         }
     }
 
     public void play(Player p, Location l) {
-        for (int i = 0; i < size(); i++) {
-            get(i).play(p, l);
+        for (SoundData soundData : this) {
+            soundData.play(p, l);
         }
-    }
-
-    public void play(Player p) {
-        play(p, p.getLocation());
     }
 
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < size(); i++) {
+        for (SoundData soundData : this) {
             if (s.length() > 0) {
                 s.append(", ");
             }
-            s.append(get(i).toString());
+            s.append(soundData.toString());
         }
         return s.toString();
     }

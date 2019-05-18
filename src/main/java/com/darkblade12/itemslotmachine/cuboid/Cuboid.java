@@ -44,9 +44,7 @@ public final class Cuboid implements Iterable<Block> {
         int z = l.getBlockZ();
         if (x >= x1 && x <= x2) {
             if (y >= y1 && y <= y2) {
-                if (z >= z1 && z <= z2) {
-                    return true;
-                }
+                return z >= z1 && z <= z2;
             }
         }
         return false;
@@ -64,40 +62,6 @@ public final class Cuboid implements Iterable<Block> {
         return false;
     }
 
-    public boolean isEmpty() {
-        for (Block b : this) {
-            if (b.getType() != Material.AIR) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void setBlocks(Material m) {
-        if (m.isBlock()) {
-            throw new IllegalArgumentException("'" + m.name() + "' is not a valid block material");
-        }
-        for (Block b : this) {
-            b.setType(m);
-        }
-    }
-
-    private int getSizeX() {
-        return (x2 - x1) + 1;
-    }
-
-    private int getSizeY() {
-        return (y2 - y1) + 1;
-    }
-
-    private int getSizeZ() {
-        return (z2 - z1) + 1;
-    }
-
-    public int getVolume() {
-        return getSizeX() * getSizeY() * getSizeZ();
-    }
-
     public Location getLowerNE() {
         return new Location(getWorld(), x1, y1, z1);
     }
@@ -106,7 +70,7 @@ public final class Cuboid implements Iterable<Block> {
         return new Location(getWorld(), x2, y2, z2);
     }
 
-    public World getWorld() {
+    private World getWorld() {
         World w = Bukkit.getWorld(worldName);
         if (w == null) {
             throw new IllegalStateException("World '" + worldName + "' is not loaded");

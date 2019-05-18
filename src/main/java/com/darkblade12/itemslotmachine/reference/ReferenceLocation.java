@@ -64,10 +64,6 @@ public class ReferenceLocation {
         return f;
     }
 
-    public int getU() {
-        return u;
-    }
-
     Location getBukkitLocation(Location c, Direction d) {
         int x = c.getBlockX();
         int y = c.getBlockY();
@@ -85,24 +81,12 @@ public class ReferenceLocation {
         return null;
     }
 
-    public Location getBukkitLocation(Player p) {
-        return getBukkitLocation(p.getLocation(), Direction.get(p));
-    }
-
     public SafeLocation getSafeLocation(Location c, Direction d) {
         return SafeLocation.fromBukkitLocation(getBukkitLocation(c, d));
     }
 
-    public SafeLocation getSafeLocation(Player p) {
-        return getSafeLocation(p.getLocation(), Direction.get(p));
-    }
-
     public Block getBukkitBlock(Location c, Direction d) {
         return getBukkitLocation(c, d).getBlock();
-    }
-
-    public Block getBukkitBlock(Player p) {
-        return getBukkitBlock(p.getLocation(), Direction.get(p));
     }
 
     @Override
@@ -120,6 +104,7 @@ public class ReferenceLocation {
 
     @Override
     public ReferenceLocation clone() {
+        ReferenceLocation referenceLocation = (ReferenceLocation) super.clone();
         return new ReferenceLocation(l, f, u);
     }
 }

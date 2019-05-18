@@ -8,7 +8,10 @@ import com.darkblade12.itemslotmachine.statistic.types.PlayerStatistic;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public final class StatisticManager extends Manager {
 
@@ -30,7 +33,7 @@ public final class StatisticManager extends Manager {
     public void onDisable() {
     }
 
-    public void loadStatistics() {
+    private void loadStatistics() {
         statistics = new NameableList<>(true);
         for (String name : getNames()) {
             try {
@@ -46,22 +49,18 @@ public final class StatisticManager extends Manager {
         plugin.l.info(amount + " player statistic" + (amount == 1 ? "" : "s") + " loaded.");
     }
 
-    public void register(PlayerStatistic p) {
+    private void register(PlayerStatistic p) {
         statistics.add(p);
         p.saveToFile();
     }
 
-    public PlayerStatistic create(String name) {
+    private PlayerStatistic create(String name) {
         PlayerStatistic s = new PlayerStatistic(name);
         register(s);
         return s;
     }
 
-    public PlayerStatistic create(Player p) {
-        return create(p.getName());
-    }
-
-    public static Set<String> getNames() {
+    private static Set<String> getNames() {
         Set<String> names = new HashSet<>();
         if (DIRECTORY.exists() && DIRECTORY.isDirectory()) {
             for (File f : DIRECTORY.listFiles()) {
@@ -74,11 +73,7 @@ public final class StatisticManager extends Manager {
         return names;
     }
 
-    public List<PlayerStatistic> getStatistics() {
-        return Collections.unmodifiableList(statistics);
-    }
-
-    public PlayerStatistic getStatistic(String name, boolean create) {
+    private PlayerStatistic getStatistic(String name, boolean create) {
         PlayerStatistic p = getStatistic(name);
         return p == null ? create ? create(name) : null : p;
     }
@@ -91,25 +86,13 @@ public final class StatisticManager extends Manager {
         return statistics.get(name);
     }
 
-    public PlayerStatistic getStatistic(Player p) {
-        return getStatistic(p.getName());
-    }
-
-    public boolean hasStatistic(String name) {
-        return statistics.contains(name);
-    }
-
-    public boolean hasStatistic(Player p) {
-        return hasStatistic(p.getName());
-    }
-
     public int getStatisticAmount() {
         return statistics.size();
     }
 
     public List<PlayerStatistic> getTop(Type t) {
         List<PlayerStatistic> top = new ArrayList<>(statistics);
-        Collections.sort(top, new StatisticComparator(t));
+        top.sort(new StatisticComparator(t));
         return top;
     }
 }

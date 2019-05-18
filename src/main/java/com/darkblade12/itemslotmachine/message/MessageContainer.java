@@ -1,6 +1,6 @@
 package com.darkblade12.itemslotmachine.message;
 
-public interface MessageContainer {
+interface MessageContainer {
 
     String plugin_prefix();
 

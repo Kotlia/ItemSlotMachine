@@ -43,6 +43,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -136,19 +137,17 @@ public class MetricsLite {
      * Start measuring statistics. This will immediately create an async repeating task as the plugin and send the
      * initial data to the metrics backend, and then after that it will post in increments of PING_INTERVAL * 1200
      * ticks.
-     *
-     * @return True if statistics measuring is running, otherwise false.
      */
-    public boolean start() {
+    public void start() {
         synchronized (optOutLock) {
             // Did we opt out?
             if (isOptOut()) {
-                return false;
+                return;
             }
 
             // Is metrics already running?
             if (task != null) {
-                return true;
+                return;
             }
 
             // Begin hitting the server with glorious data
@@ -183,8 +182,6 @@ public class MetricsLite {
                     }
                 }
             }, 0, PING_INTERVAL * 1200);
-
-            return true;
         }
     }
 
@@ -198,12 +195,7 @@ public class MetricsLite {
             try {
                 // Reload the metrics file
                 configuration.load(getConfigFile());
-            } catch (IOException ex) {
-                if (debug) {
-                    Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
-                }
-                return true;
-            } catch (InvalidConfigurationException ex) {
+            } catch (IOException | InvalidConfigurationException ex) {
                 if (debug) {
                     Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
                 }
@@ -313,7 +305,7 @@ public class MetricsLite {
         StringBuilder json = new StringBuilder(1024);
         json.append('{');
 
-        // The plugin's description file containg all of the plugin data such as name, version, author, etc
+        // The plugin's description file containing all of the plugin data such as name, version, author, etc
         appendJSONPair(json, "guid", guid);
         appendJSONPair(json, "plugin_version", pluginVersion);
         appendJSONPair(json, "server_version", serverVersion);
@@ -409,20 +401,11 @@ public class MetricsLite {
      */
     private static byte[] gzip(String input) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        GZIPOutputStream gzos = null;
 
-        try {
-            gzos = new GZIPOutputStream(baos);
-            gzos.write(input.getBytes("UTF-8"));
+        try (GZIPOutputStream gzos = new GZIPOutputStream(baos)) {
+            gzos.write(input.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (gzos != null) {
-                try {
-                    gzos.close();
-                } catch (IOException ignore) {
-                }
-            }
         }
 
         return baos.toByteArray();
@@ -448,9 +431,8 @@ public class MetricsLite {
      * @param json
      * @param key
      * @param value
-     * @throws UnsupportedEncodingException
      */
-    private static void appendJSONPair(StringBuilder json, String key, String value) throws UnsupportedEncodingException {
+    private static void appendJSONPair(StringBuilder json, String key, String value) {
         boolean isValueNumeric = false;
 
         try {
@@ -510,7 +492,7 @@ public class MetricsLite {
                 default:
                     if (chr < ' ') {
                         String t = "000" + Integer.toHexString(chr);
-                        builder.append("\\u" + t.substring(t.length() - 4));
+                        builder.append("\\u").append(t.substring(t.length() - 4));
                     } else {
                         builder.append(chr);
                     }
@@ -529,6 +511,6 @@ public class MetricsLite {
      * @return the encoded text, as UTF-8
      */
     private static String urlEncode(String text) throws UnsupportedEncodingException {
-        return URLEncoder.encode(text, "UTF-8");
+        return URLEncoder.encode(text, StandardCharsets.UTF_8);
     }
 }

@@ -30,7 +30,7 @@ public final class Design implements Nameable {
     private final ReferenceCuboid region;
     private final Direction initialDirection;
 
-    public Design(String name, Set<ReferenceBlock> blocks, ReferenceItemFrame[] itemFrames, ReferenceBlock sign, ReferenceBlock slot, ReferenceCuboid region, Direction initialDirection) {
+    private Design(String name, Set<ReferenceBlock> blocks, ReferenceItemFrame[] itemFrames, ReferenceBlock sign, ReferenceBlock slot, ReferenceCuboid region, Direction initialDirection) {
         this.name = name;
         reader = new CompressedStringReader(name + ".design", "plugins/ItemSlotMachine/designs/");
         this.blocks = blocks;
@@ -139,12 +139,8 @@ public final class Design implements Nameable {
         }
     }
 
-    public void destruct(Player p) {
-        destruct(p.getLocation(), Direction.get(p));
-    }
-
-    boolean saveToFile() {
-        return reader.saveToFile(toString());
+    void saveToFile() {
+        reader.saveToFile(toString());
     }
 
     void deleteFile() {
@@ -154,10 +150,6 @@ public final class Design implements Nameable {
     @Override
     public String getName() {
         return name;
-    }
-
-    public Set<ReferenceBlock> getBlocks() {
-        return blocks;
     }
 
     public ReferenceItemFrame[] getItemFrames() {
@@ -176,10 +168,6 @@ public final class Design implements Nameable {
         return region;
     }
 
-    public Direction getInitialDirection() {
-        return initialDirection;
-    }
-
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder(name + "#");
@@ -191,7 +179,7 @@ public final class Design implements Nameable {
             s.append(r.toString(false));
             i++;
         }
-        s.append("#" + itemFrames[0].toString(false) + ", " + itemFrames[1].toString(false) + ", " + itemFrames[2].toString(false) + "#" + sign.toString(false) + "#" + slot.toString(false) + "#" + region + "#" + initialDirection.name());
+        s.append("#").append(itemFrames[0].toString(false)).append(", ").append(itemFrames[1].toString(false)).append(", ").append(itemFrames[2].toString(false)).append("#").append(sign.toString(false)).append("#").append(slot.toString(false)).append("#").append(region).append("#").append(initialDirection.name());
         return s.toString();
     }
 }

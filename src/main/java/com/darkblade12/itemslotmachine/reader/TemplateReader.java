@@ -13,11 +13,6 @@ public final class TemplateReader extends FileReader {
         this.plugin = plugin;
     }
 
-    public TemplateReader(Plugin plugin, String resourceFileName, String fileName, String directoryName) {
-        super(resourceFileName, fileName, directoryName);
-        this.plugin = plugin;
-    }
-
     public boolean readTemplate() {
         return outputFile.exists() || saveDefaultTemplate();
     }

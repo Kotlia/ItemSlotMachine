@@ -20,7 +20,7 @@ public abstract class CommandHandler implements CommandExecutor {
     private final ICommand helpCommand;
     private final List<String> masterPermissions;
 
-    public CommandHandler(ItemSlotMachine plugin, String defaultLabel, int commandsPerPage, String... masterPermissions) {
+    protected CommandHandler(ItemSlotMachine plugin, String defaultLabel, int commandsPerPage, String... masterPermissions) {
         this.plugin = plugin;
         this.defaultLabel = defaultLabel;
         plugin.getCommand(defaultLabel).setExecutor(this);
@@ -70,7 +70,7 @@ public abstract class CommandHandler implements CommandExecutor {
     protected abstract void registerCommands();
 
     private static String[] trimParams(String[] args) {
-        return (String[]) Arrays.copyOfRange(args, 1, args.length);
+        return Arrays.copyOfRange(args, 1, args.length);
     }
 
     private static boolean checkUsage(ICommand i, String[] params) {
@@ -81,9 +81,9 @@ public abstract class CommandHandler implements CommandExecutor {
         }
         String[] p = commandParams.split(" ");
         int min = 0, max = c.infiniteParams() ? 100 : 0;
-        for (int a = 0; a < p.length; a++) {
+        for (String s : p) {
             max++;
-            if (!p[a].matches("\\[.*\\]")) {
+            if (!s.matches("\\[.*\\]")) {
                 min++;
             }
         }
@@ -123,9 +123,5 @@ public abstract class CommandHandler implements CommandExecutor {
         CommandDetails c = CommandList.getDetails(i);
         String params = c.params();
         return "/" + label + " " + c.name() + (params.length() > 0 ? " " + params : "");
-    }
-
-    public String getUsage(ICommand i) {
-        return getUsage(defaultLabel, i);
     }
 }

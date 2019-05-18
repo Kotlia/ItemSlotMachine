@@ -71,7 +71,7 @@ public final class DesignManager extends Manager implements NameGenerator {
     }
 
     private void sort() {
-        Collections.sort(designs, comparator);
+        designs.sort(comparator);
     }
 
     private void loadDesigns() {
@@ -144,10 +144,6 @@ public final class DesignManager extends Manager implements NameGenerator {
         return designs.contains(name);
     }
 
-    public int getDesignAmount() {
-        return designs.size();
-    }
-
     private SafeLocation[] getSelection(Player p) {
         String name = p.getName();
         return selections.containsKey(name) ? selections.get(name) : new SafeLocation[2];
@@ -171,7 +167,7 @@ public final class DesignManager extends Manager implements NameGenerator {
         Action a = event.getAction();
         if (a == Action.LEFT_CLICK_BLOCK || a == Action.RIGHT_CLICK_BLOCK) {
             Player p = event.getPlayer();
-            if (p.getItemInHand().isSimilar(wand)) {
+            if (p.getInventory().getItemInMainHand().isSimilar(wand)) {
                 event.setCancelled(true);
                 Location l = event.getClickedBlock().getLocation();
                 boolean first = a == Action.LEFT_CLICK_BLOCK;

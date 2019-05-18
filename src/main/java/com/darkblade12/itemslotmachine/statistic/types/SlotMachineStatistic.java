@@ -10,7 +10,7 @@ public final class SlotMachineStatistic extends Statistic implements Nameable {
     private final String name;
     private final CompressedStringReader reader;
 
-    public SlotMachineStatistic(String name) {
+    private SlotMachineStatistic(String name) {
         super(Type.TOTAL_SPINS, Type.WON_SPINS, Type.LOST_SPINS);
         this.name = name;
         reader = new CompressedStringReader(name + ".statistic", "plugins/ItemSlotMachine/statistics/slot machine/");
@@ -22,7 +22,7 @@ public final class SlotMachineStatistic extends Statistic implements Nameable {
         return s;
     }
 
-    public void loadStatistic() throws Exception {
+    private void loadStatistic() throws Exception {
         if (reader.getOuputFile().exists()) {
             loadStatistic(reader.readFromFile());
         } else {
@@ -30,8 +30,8 @@ public final class SlotMachineStatistic extends Statistic implements Nameable {
         }
     }
 
-    public boolean saveToFile() {
-        return reader.saveToFile(toString());
+    public void saveToFile() {
+        reader.saveToFile(toString());
     }
 
     public void deleteFile() {

@@ -12,9 +12,9 @@ public enum Action {
     MULTIPLY_POT_AND_DISTRIBUTE(true, MoneyPotCombo.class),
     ADD_TO_POT_AND_DISTRIBUTE(true, MoneyPotCombo.class, ItemPotCombo.class),
     DISTRIBUTE_POT(false, MoneyPotCombo.class, ItemPotCombo.class),
-    DISTRIBUTE_INDEPENDANT_MONEY(true, MoneyPotCombo.class),
+    DISTRIBUTE_INDEPENDENT_MONEY(true, MoneyPotCombo.class),
     DOUBLE_POT_ITEMS_AND_DISTRIBUTE(false, ItemPotCombo.class),
-    DISTRIBUTE_INDEPENDANT_ITEMS(true, ItemPotCombo.class);
+    DISTRIBUTE_INDEPENDENT_ITEMS(true, ItemPotCombo.class);
 
     private final boolean requiresInput;
     private final List<Class<? extends Combo>> applicable;
@@ -27,17 +27,13 @@ public enum Action {
     }
 
     @SafeVarargs
-    private Action(boolean requiresInput, Class<? extends Combo>... applicable) {
+    Action(boolean requiresInput, Class<? extends Combo>... applicable) {
         this.requiresInput = requiresInput;
         this.applicable = Arrays.asList(applicable);
     }
 
     public boolean requiresInput() {
         return requiresInput;
-    }
-
-    public List<Class<? extends Combo>> getApplicable() {
-        return applicable;
     }
 
     public boolean isApplicable(Class<? extends Combo> clazz) {

@@ -49,7 +49,7 @@ public final class SlotMachine extends SlotMachineBase implements Nameable {
 
     private void playTickingSounds() {
         if (tickingSoundsEnabled) {
-            Location l = this.slot.getBukkitLocation();
+            Location l = slot.getBukkitLocation();
             if (tickingSoundsBroadcast) {
                 tickingSounds.play(l);
             } else {
@@ -60,7 +60,7 @@ public final class SlotMachine extends SlotMachineBase implements Nameable {
 
     private void playWinSounds() {
         if (winSoundsEnabled) {
-            Location l = this.slot.getBukkitLocation();
+            Location l = slot.getBukkitLocation();
             if (winSoundsBroadcast) {
                 winSounds.play(l);
             } else {
@@ -71,7 +71,7 @@ public final class SlotMachine extends SlotMachineBase implements Nameable {
 
     private void playLoseSounds() {
         if (loseSoundsEnabled) {
-            Location l = this.slot.getBukkitLocation();
+            Location l = slot.getBukkitLocation();
             if (loseSoundsBroadcast) {
                 loseSounds.play(l);
             } else {
@@ -83,7 +83,7 @@ public final class SlotMachine extends SlotMachineBase implements Nameable {
     private void playWinEffect() {
         playWinSounds();
         if (fireworksEnabled) {
-            Rocket.randomize().displayEffects(plugin, this.slot.getBukkitLocation().add(0.5, 2, 0.5));
+            Rocket.randomize().displayEffects(plugin, slot.getBukkitLocation().add(0.5, 2, 0.5));
         }
     }
 
@@ -248,13 +248,13 @@ public final class SlotMachine extends SlotMachineBase implements Nameable {
                 case ADD_TO_POT_AND_DISTRIBUTE:
                     moneyPrize += m.getAmount();
                     break;
-                case DISTRIBUTE_INDEPENDANT_MONEY:
+                case DISTRIBUTE_INDEPENDENT_MONEY:
                     moneyPrize = m.getAmount();
                     break;
                 default:
                     break;
             }
-            if (m.getAction() != Action.DISTRIBUTE_INDEPENDANT_MONEY) {
+            if (m.getAction() != Action.DISTRIBUTE_INDEPENDENT_MONEY) {
                 resetMoneyPot();
             }
             handleWin(moneyPrize, new ItemList(), false);
@@ -267,13 +267,13 @@ public final class SlotMachine extends SlotMachineBase implements Nameable {
                 case DOUBLE_POT_ITEMS_AND_DISTRIBUTE:
                     itemPrize.doubleAmounts();
                     break;
-                case DISTRIBUTE_INDEPENDANT_ITEMS:
+                case DISTRIBUTE_INDEPENDENT_ITEMS:
                     itemPrize = i.getItems();
                     break;
                 default:
                     break;
             }
-            if (i.getAction() != Action.DISTRIBUTE_INDEPENDANT_ITEMS) {
+            if (i.getAction() != Action.DISTRIBUTE_INDEPENDENT_ITEMS) {
                 resetItemPot();
             }
             handleWin(0, itemPrize, false);
@@ -327,10 +327,6 @@ public final class SlotMachine extends SlotMachineBase implements Nameable {
         return userName == null ? false : p.getName().equals(userName);
     }
 
-    public long getLockEnd() {
-        return lockEnd;
-    }
-
     int getRemainingLockTime() {
         return (int) (lockEnd - System.currentTimeMillis()) / 1000;
     }
@@ -341,10 +337,6 @@ public final class SlotMachine extends SlotMachineBase implements Nameable {
 
     public boolean isActive() {
         return active;
-    }
-
-    public boolean isHalted() {
-        return halted;
     }
 
     boolean isPermittedToHalt(Player p) {

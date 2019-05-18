@@ -22,16 +22,12 @@ public final class PlayerStatistic extends Statistic implements Nameable {
         return p;
     }
 
-    public void loadStatistic() throws Exception {
+    private void loadStatistic() throws Exception {
         loadStatistic(reader.readFromFile());
     }
 
-    public boolean saveToFile() {
-        return reader.saveToFile(toString());
-    }
-
-    public void deleteFile() {
-        reader.deleteFile();
+    public void saveToFile() {
+        reader.saveToFile(toString());
     }
 
     @Override

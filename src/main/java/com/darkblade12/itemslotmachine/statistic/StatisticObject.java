@@ -19,7 +19,7 @@ public final class StatisticObject implements Nameable, Cloneable, Comparable<St
         this(type, type.parse("0"));
     }
 
-    public static StatisticObject fromString(String s) throws Exception {
+    public static StatisticObject fromString(String s) {
         if (!s.matches(FORMAT)) {
             throw new IllegalArgumentException("Invalid format");
         }
@@ -36,7 +36,7 @@ public final class StatisticObject implements Nameable, Cloneable, Comparable<St
         return new BigDecimal(value.doubleValue()).compareTo(new BigDecimal(s.getValue().doubleValue()));
     }
 
-    public void setValue(Number value) {
+    private void setValue(Number value) {
         this.value = value;
     }
 
@@ -44,24 +44,8 @@ public final class StatisticObject implements Nameable, Cloneable, Comparable<St
         setValue(type.parse("0"));
     }
 
-    public void increaseValue(byte amount) {
-        setValue(value.byteValue() + amount);
-    }
-
-    public void increaseValue(short amount) {
-        setValue(value.shortValue() + amount);
-    }
-
     public void increaseValue(int amount) {
         setValue(value.intValue() + amount);
-    }
-
-    public void increaseValue(long amount) {
-        setValue(value.longValue() + amount);
-    }
-
-    public void increaseValue(float amount) {
-        setValue(value.floatValue() + amount);
     }
 
     public void increaseValue(double amount) {
@@ -88,6 +72,7 @@ public final class StatisticObject implements Nameable, Cloneable, Comparable<St
 
     @Override
     public StatisticObject clone() {
+        StatisticObject statisticObject = (StatisticObject) super.clone();
         return new StatisticObject(type, value);
     }
 }

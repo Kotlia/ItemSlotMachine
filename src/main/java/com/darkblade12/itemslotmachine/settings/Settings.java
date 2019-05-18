@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +17,6 @@ public final class Settings {
     private static final SimpleSection COIN_SETTINGS = new SimpleSection(SLOT_MACHINE_SETTINGS, "Coin_Settings");
     private static final SimpleSection LIMITED_USAGE = new SimpleSection(SLOT_MACHINE_SETTINGS, "Limited_Usage");
     private static final SimpleSection DESIGN_SETTINGS = new SimpleSection("Design_Settings");
-    //    private static final String BLOCK_LIST_FORMAT = "(\\d+|[\\w\\s]+)(, (\\d+|[\\w\\s]+))*";
     private static final String BLOCK_LIST_FORMAT = "([A-Z_]+)(, ([A-Z_]+))*";
     private final ItemSlotMachine plugin;
     private static boolean debugModeEnabled;
@@ -126,10 +124,6 @@ public final class Settings {
 
     public static boolean isSpaceCheckEnabled() {
         return spaceCheckEnabled;
-    }
-
-    public static Set<Material> getSpaceCheckIgnoredBlocks() {
-        return Collections.unmodifiableSet(spaceCheckIgnoredBlocks);
     }
 
     public static boolean isBlockIgnored(Material m) {

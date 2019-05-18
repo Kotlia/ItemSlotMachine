@@ -33,7 +33,7 @@ public final class ItemCommand implements ICommand {
                 sender.sendMessage(plugin.messageManager.command_no_console_executor());
                 return;
             }
-            ItemStack i = ((Player) sender).getItemInHand();
+            ItemStack i = ((Player) sender).getInventory().getItemInMainHand();
             if (i.getType() == Material.AIR) {
                 sender.sendMessage(plugin.messageManager.player_no_item_in_hand());
                 return;

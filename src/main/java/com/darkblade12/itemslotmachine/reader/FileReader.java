@@ -9,10 +9,10 @@ import java.io.OutputStream;
 
 public abstract class FileReader {
 
-    private String resourceFileName;
-    private String outputFileName;
-    String outputPath;
-    File outputFile;
+    private final String resourceFileName;
+    private final String outputFileName;
+    final String outputPath;
+    final File outputFile;
 
     FileReader(String resourceFileName, String outputFileName, String outputPath) {
         this.resourceFileName = resourceFileName;
@@ -28,7 +28,7 @@ public abstract class FileReader {
         this(fileName, fileName, outputPath);
     }
 
-    protected void deleteFile() {
+    void deleteFile() {
         if (outputFile.exists()) {
             outputFile.delete();
         }

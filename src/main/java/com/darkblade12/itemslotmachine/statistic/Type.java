@@ -73,7 +73,6 @@ public enum Type {
         }
     };
 
-    private final Class<? extends Number> valueType;
     private static final Map<String, Type> NAME_MAP = new HashMap<>();
 
     static {
@@ -82,8 +81,7 @@ public enum Type {
         }
     }
 
-    private Type(Class<? extends Number> valueType) {
-        this.valueType = valueType;
+    Type(Class<? extends Number> valueType) {
     }
 
     public StatisticObject createObject() {
@@ -91,10 +89,6 @@ public enum Type {
     }
 
     public abstract Number parse(String s);
-
-    public Class<? extends Number> getValueType() {
-        return valueType;
-    }
 
     public abstract String getRealName(ItemSlotMachine plugin);
 

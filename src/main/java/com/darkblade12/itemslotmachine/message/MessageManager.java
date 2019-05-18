@@ -128,14 +128,14 @@ public final class MessageManager extends Manager implements MessageContainer {
         return messages.get(name);
     }
 
-    public String getMessage(String name, boolean prefix) {
+    private String getMessage(String name, boolean prefix) {
         return (prefix ? plugin_prefix() : "") + getMessage(name);
     }
 
     private static String designsToString(List<Design> list) {
         StringBuilder s = new StringBuilder();
         for (Design d : list) {
-            s.append("\n§r §7\u25C9 " + randomColorCode() + d.getName());
+            s.append("\n§r §7\u25C9 ").append(randomColorCode()).append(d.getName());
         }
         return s.toString();
     }
@@ -143,7 +143,7 @@ public final class MessageManager extends Manager implements MessageContainer {
     private static String slotMachinesToString(List<SlotMachine> list) {
         StringBuilder s = new StringBuilder();
         for (SlotMachine m : list) {
-            s.append("\n§r §6\u25C9 §2" + m.getName() + " §7\u25BB §eActive: " + (m.isActive() ? TRUE : FALSE));
+            s.append("\n§r §6\u25C9 §2").append(m.getName()).append(" §7\u25BB §eActive: ").append(m.isActive() ? TRUE : FALSE);
         }
         return s.toString();
     }
@@ -151,11 +151,11 @@ public final class MessageManager extends Manager implements MessageContainer {
     private static String formatEnumName(String name) {
         StringBuilder s = new StringBuilder();
         String[] p = name.split("_");
-        for (int i = 0; i < p.length; i++) {
+        for (String value : p) {
             if (s.length() > 0) {
                 s.append(" ");
             }
-            s.append(Character.toUpperCase(p[i].charAt(0)) + p[i].substring(1).toLowerCase());
+            s.append(Character.toUpperCase(value.charAt(0)) + value.substring(1).toLowerCase());
         }
         return s.toString();
     }
@@ -178,9 +178,9 @@ public final class MessageManager extends Manager implements MessageContainer {
         for (ItemStack i : items) {
             if (a > 0) {
                 if (a == items.size() - 1) {
-                    s.append(colors + " " + and() + " ");
+                    s.append(colors).append(" ").append(and()).append(" ");
                 } else {
-                    s.append(colors + ", ");
+                    s.append(colors).append(", ");
                 }
             }
             s.append(itemToString(i));
@@ -193,7 +193,7 @@ public final class MessageManager extends Manager implements MessageContainer {
         StringBuilder s = new StringBuilder();
         for (StatisticObject o : statistic.getObjects()) {
             String c = randomColorCode();
-            s.append("\n§r §7" + randomDice() + " " + c + o.getType().getRealName(plugin) + ": " + equalColorCode(c) + o.getValue());
+            s.append("\n§r §7").append(randomDice()).append(" ").append(c).append(o.getType().getRealName(plugin)).append(": ").append(equalColorCode(c)).append(o.getValue());
         }
         return s.toString();
     }
@@ -204,7 +204,7 @@ public final class MessageManager extends Manager implements MessageContainer {
         int size = top.size();
         for (int i = 0; i < (size > 10 ? 10 : size); i++) {
             SlotMachineStatistic m = top.get(i);
-            s.append("\n§r " + getSymbol(i + 1) + " §a" + m.getName() + " §8(§e" + m.getObject(category).getValue() + "§8)");
+            s.append("\n§r ").append(getSymbol(i + 1)).append(" §a").append(m.getName()).append(" §8(§e").append(m.getObject(category).getValue()).append("§8)");
         }
         return s.toString();
     }
@@ -215,7 +215,7 @@ public final class MessageManager extends Manager implements MessageContainer {
         int size = top.size();
         for (int i = 0; i < (size > 10 ? 10 : size); i++) {
             PlayerStatistic p = top.get(i);
-            s.append("\n§r " + getSymbol(i + 1) + " §a" + p.getName() + " §8(§e" + p.getObject(category).getValue() + "§8)");
+            s.append("\n§r ").append(getSymbol(i + 1)).append(" §a").append(p.getName()).append(" §8(§e").append(p.getObject(category).getValue()).append("§8)");
         }
         return s.toString();
     }
@@ -256,7 +256,7 @@ public final class MessageManager extends Manager implements MessageContainer {
 
     @Override
     public String help_page_footer(int currentPage, int pageAmount) {
-        return getMessage("help_page_footer").replace("<current_page>", (currentPage == pageAmount ? "§6§l" : "§a§l") + Integer.toString(currentPage)).replace("<page_amount>", Integer.toString(pageAmount));
+        return getMessage("help_page_footer").replace("<current_page>", (currentPage == pageAmount ? "§6§l" : "§a§l") + currentPage).replace("<page_amount>", Integer.toString(pageAmount));
     }
 
     @Override

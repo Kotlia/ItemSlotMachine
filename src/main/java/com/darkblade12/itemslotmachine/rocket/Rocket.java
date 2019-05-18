@@ -7,7 +7,6 @@ import org.bukkit.FireworkEffect.Type;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -28,10 +27,6 @@ public class Rocket {
         }
     }
 
-    private Rocket(FireworkMeta meta) {
-        this(meta, false);
-    }
-
     private Rocket(FireworkMeta meta, boolean isClean) {
         if (isClean) {
             this.meta = meta;
@@ -42,10 +37,6 @@ public class Rocket {
         }
     }
 
-    public Rocket() {
-        this(getCleanMeta());
-    }
-
     public static Rocket randomize() {
         FireworkMeta meta = getCleanMeta();
         meta.setPower(RANDOM.nextInt(3) + 1);
@@ -53,15 +44,7 @@ public class Rocket {
         return new Rocket(meta, true);
     }
 
-    public static Rocket fromItemStack(ItemStack i) {
-        ItemMeta meta = i.hasItemMeta() ? i.getItemMeta() : null;
-        if (i.getType() != Material.FIREWORK_ROCKET || meta == null || !(meta instanceof FireworkMeta)) {
-            throw new IllegalArgumentException("This ItemStack is not a firework");
-        }
-        return new Rocket((FireworkMeta) meta);
-    }
-
-    public static Rocket fromString(String s) throws Exception {
+    private static Rocket fromString(String s) {
         try {
             FireworkMeta meta = getCleanMeta();
             String[] p = s.split("@");
@@ -140,40 +123,8 @@ public class Rocket {
         }.runTaskLater(plugin, 1);
     }
 
-    public boolean saveToFile(String name) {
-        return new CompressedStringReader(name + ".rckt", "plugins/UltimateRockets/rockets/").saveToFile(toString());
-    }
-
-    public static void deleteFile(String name) {
-        new CompressedStringReader(name + ".rckt", "plugins/UltimateRockets/rockets/").deleteFile();
-    }
-
-    public boolean isSimilar(Rocket r) {
-        return meta.equals(r.getMeta());
-    }
-
     private static FireworkMeta getCleanMeta() {
         return (FireworkMeta) new ItemStack(Material.FIREWORK_ROCKET).getItemMeta();
-    }
-
-    private FireworkMeta getMeta() {
-        return meta;
-    }
-
-    public boolean hasEffects() {
-        return meta.getEffects().size() > 0;
-    }
-
-    public ItemStack getItem() {
-        ItemStack i = new ItemStack(Material.FIREWORK_ROCKET);
-        i.setItemMeta(meta);
-        return i;
-    }
-
-    public ItemStack getItem(int amount) {
-        ItemStack i = getItem();
-        i.setAmount(amount);
-        return i;
     }
 
     @Override
@@ -181,15 +132,15 @@ public class Rocket {
         StringBuilder s = new StringBuilder(meta.getPower() + "@");
         int e = 1;
         for (FireworkEffect f : meta.getEffects()) {
-            s.append(f.hasFlicker() + "," + f.hasTrail() + "," + f.getType().name() + ",");
+            s.append(f.hasFlicker()).append(",").append(f.hasTrail()).append(",").append(f.getType().name()).append(",");
             int a = 1;
             for (Color c : f.getColors()) {
-                s.append(c.asRGB() + (a == f.getColors().size() ? f.getFadeColors().size() > 0 ? "~" : "" : "-"));
+                s.append(c.asRGB()).append(a == f.getColors().size() ? f.getFadeColors().size() > 0 ? "~" : "" : "-");
                 a++;
             }
             int b = 1;
             for (Color c : f.getFadeColors()) {
-                s.append(c.asRGB() + (b == f.getFadeColors().size() ? "" : "-"));
+                s.append(c.asRGB()).append(b == f.getFadeColors().size() ? "" : "-");
                 b++;
             }
             if (e != meta.getEffectsSize()) {

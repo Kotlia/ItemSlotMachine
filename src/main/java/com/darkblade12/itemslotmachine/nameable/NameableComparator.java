@@ -20,12 +20,4 @@ public final class NameableComparator<T extends Nameable> implements Comparator<
             return name1.compareTo(name2);
         }
     }
-
-    public void setRawName(String rawName) {
-        this.rawName = rawName;
-    }
-
-    public String getRawName() {
-        return rawName;
-    }
 }

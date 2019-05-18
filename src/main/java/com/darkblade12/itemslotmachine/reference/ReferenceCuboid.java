@@ -23,20 +23,8 @@ public final class ReferenceCuboid {
         return new ReferenceCuboid(ReferenceLocation.fromString(p[0]), ReferenceLocation.fromString(p[1]));
     }
 
-    public ReferenceLocation getFirstLocation() {
-        return firstLocation;
-    }
-
-    public ReferenceLocation getSecondLocation() {
-        return secondLocation;
-    }
-
-    public Cuboid getCuboid(Location c, Direction d) throws Exception {
+    public Cuboid getCuboid(Location c, Direction d) {
         return new Cuboid(firstLocation.getBukkitLocation(c, d), secondLocation.getBukkitLocation(c, d));
-    }
-
-    public Cuboid getCuboid(Player p) throws Exception {
-        return getCuboid(p.getLocation(), Direction.get(p));
     }
 
     @Override

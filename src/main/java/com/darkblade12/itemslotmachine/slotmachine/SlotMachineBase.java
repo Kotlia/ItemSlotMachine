@@ -53,15 +53,16 @@ public abstract class SlotMachineBase implements Nameable {
     private static final SimpleSection ITEM_POT_HOUSE_CUT = new SimpleSection(ITEM_POT_SETTINGS, "House_Cut");
     private static final SimpleSection ITEM_POT_COMBO_SETTINGS = new SimpleSection(ITEM_POT_SETTINGS, "Combo_Settings");
     private static final Random RANDOM = new Random();
-    protected ItemSlotMachine plugin;
-    protected String name;
-    CompressedStringReader instanceReader;
-    protected SlotMachineStatistic statistic;
+    final ItemSlotMachine plugin;
+    final String name;
+    final CompressedStringReader instanceReader;
+    SlotMachineStatistic statistic;
     ConfigReader configReader;
-    protected Design design;
+    Design design;
     SafeLocation center;
     Direction initialDirection;
-    public SafeLocation sign, slot;
+    private SafeLocation sign;
+    SafeLocation slot;
     private Cuboid region;
     int activationAmount;
     private ItemList itemIcons;
@@ -420,10 +421,9 @@ public abstract class SlotMachineBase implements Nameable {
         return moneyPot;
     }
 
-    public ItemList depositPotItems(ItemList items) {
+    public void depositPotItems(ItemList items) {
         itemPot.addAll(items.clone());
         update();
-        return itemPot.clone();
     }
 
     void raisePot() {
@@ -587,7 +587,7 @@ public abstract class SlotMachineBase implements Nameable {
         throw new IllegalStateException("No suitable teleport location found");
     }
 
-    public void rebuild() {
+    void rebuild() {
         Location l = center.getBukkitLocation();
         design.destruct(l, initialDirection);
         try {
@@ -598,7 +598,7 @@ public abstract class SlotMachineBase implements Nameable {
         updateSign();
     }
 
-    public void move(BlockFace b, int amount) throws Exception {
+    void move(BlockFace b, int amount) throws Exception {
         Location l = center.getBukkitLocation();
         Location n = l.clone().add(b.getModX() * amount, b.getModY() * amount, b.getModZ() * amount);
         design.destruct(l, initialDirection);

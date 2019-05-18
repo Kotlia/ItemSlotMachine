@@ -12,11 +12,11 @@ public abstract class Statistic {
     private static final String FORMAT = "\\w+@\\d+(\\.\\d+)?(#\\w+@\\d+(\\.\\d+)?)*";
     private final NameableList<StatisticObject> objects;
 
-    public Statistic() {
+    protected Statistic() {
         objects = new NameableList<>();
     }
 
-    public Statistic(Collection<StatisticObject> c) {
+    private Statistic(Collection<StatisticObject> c) {
         objects = new NameableList<>(c);
     }
 
@@ -24,14 +24,14 @@ public abstract class Statistic {
         this(Arrays.asList(objects));
     }
 
-    public Statistic(Type... types) {
+    protected Statistic(Type... types) {
         this();
         for (Type t : types) {
             objects.add(t.createObject());
         }
     }
 
-    public void loadStatistic(String s) throws Exception {
+    protected void loadStatistic(String s) throws Exception {
         if (!s.matches(FORMAT)) {
             throw new IllegalArgumentException("Invalid format");
         }
@@ -42,8 +42,8 @@ public abstract class Statistic {
     }
 
     public void resetValues() {
-        for (int i = 0; i < objects.size(); i++) {
-            objects.get(i).resetValue();
+        for (StatisticObject object : objects) {
+            object.resetValue();
         }
     }
 
@@ -51,7 +51,7 @@ public abstract class Statistic {
         return Collections.unmodifiableList(objects);
     }
 
-    public StatisticObject getObject(String name) {
+    private StatisticObject getObject(String name) {
         return objects.get(name);
     }
 

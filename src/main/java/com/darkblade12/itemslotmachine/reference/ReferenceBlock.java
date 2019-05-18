@@ -57,18 +57,6 @@ public final class ReferenceBlock extends ReferenceLocation {
         getBukkitBlock(c, d).setBlockData(rotate(d), false);
     }
 
-    public void place(Player p) {
-        place(p.getLocation(), Direction.get(p));
-    }
-
-    public BlockData getBlockData() {
-        return blockData;
-    }
-
-    public Direction getInitialDirection() {
-        return initialDirection;
-    }
-
     public String toString(boolean direction) {
         return super.toString() + "@" + blockData.toString() + (direction ? "@" + initialDirection : "");
     }

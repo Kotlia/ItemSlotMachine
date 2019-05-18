@@ -35,23 +35,28 @@ public final class MoneyCommand implements ICommand {
             return;
         }
         String operation = params[1].toLowerCase();
-        if (operation.equals("deposit")) {
-            sender.sendMessage(plugin.messageManager.slot_machine_money_pot_deposit(amount, s.getName(), s.depositPotMoney(amount)));
-        } else if (operation.equals("withdraw")) {
-            double pot = s.getMoneyPot();
-            if (pot == 0) {
-                sender.sendMessage(plugin.messageManager.slot_machine_money_pot_empty());
-                return;
-            } else if (amount > pot) {
-                sender.sendMessage(plugin.messageManager.invalid_amount(plugin.messageManager.higher_than_number(pot)));
-                return;
-            }
-            sender.sendMessage(plugin.messageManager.slot_machine_money_pot_withdraw(amount, s.getName(), s.withdrawPotMoney(amount)));
-        } else if (operation.equals("set")) {
-            s.setMoneyPot(amount);
-            sender.sendMessage(plugin.messageManager.slot_machine_money_pot_set(s.getName(), amount));
-        } else {
-            plugin.slotCommandHandler.showUsage(sender, label, this);
+        switch (operation) {
+            case "deposit":
+                sender.sendMessage(plugin.messageManager.slot_machine_money_pot_deposit(amount, s.getName(), s.depositPotMoney(amount)));
+                break;
+            case "withdraw":
+                double pot = s.getMoneyPot();
+                if (pot == 0) {
+                    sender.sendMessage(plugin.messageManager.slot_machine_money_pot_empty());
+                    return;
+                } else if (amount > pot) {
+                    sender.sendMessage(plugin.messageManager.invalid_amount(plugin.messageManager.higher_than_number(pot)));
+                    return;
+                }
+                sender.sendMessage(plugin.messageManager.slot_machine_money_pot_withdraw(amount, s.getName(), s.withdrawPotMoney(amount)));
+                break;
+            case "set":
+                s.setMoneyPot(amount);
+                sender.sendMessage(plugin.messageManager.slot_machine_money_pot_set(s.getName(), amount));
+                break;
+            default:
+                plugin.slotCommandHandler.showUsage(sender, label, this);
+                break;
         }
     }
 }

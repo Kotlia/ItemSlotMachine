@@ -25,7 +25,7 @@ public enum Direction {
         this.rotation = rotation;
     }
 
-    public static Direction fromRotation(int i) {
+    private static Direction fromRotation(int i) {
         return ROTATION_MAP.get(i % 4);
     }
 

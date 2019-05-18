@@ -39,22 +39,6 @@ public final class SoundData {
         p.playSound(l, sound, volume, pitch);
     }
 
-    public void play(Player p) {
-        play(p, p.getLocation());
-    }
-
-    public Sound getSound() {
-        return sound;
-    }
-
-    public float getVolume() {
-        return volume;
-    }
-
-    public float getPitch() {
-        return pitch;
-    }
-
     @Override
     public String toString() {
         return sound.name() + "-" + volume + "-" + pitch;

@@ -304,7 +304,7 @@ final class BlockRotator {
                         break;
                 }
                 if (faces.size() > 1) {
-
+                    // do something
                 }
                 return multipleFacing;
             default:

@@ -31,10 +31,10 @@ public final class CommandHelpPage {
             if (i > visible.size() - 1) {
                 break;
             } else {
-                b.append("\n§r" + insertIntoFormat(label, visible.get(i)));
+                b.append("\n§r").append(insertIntoFormat(label, visible.get(i)));
             }
         }
-        b.append("\n§r" + plugin.messageManager.help_page_footer(page, getPages(sender)));
+        b.append("\n§r").append(plugin.messageManager.help_page_footer(page, getPages(sender)));
         sender.sendMessage(b.toString());
     }
 
@@ -59,19 +59,11 @@ public final class CommandHelpPage {
                 for (String p : handler.getMasterPermissions()) {
                     if (sender.hasPermission(p)) {
                         visible.add(i);
-                        break master;
+                        break;
                     }
                 }
             }
         }
         return visible;
-    }
-
-    public CommandHandler getHandler() {
-        return handler;
-    }
-
-    public int getCommandsPerPage() {
-        return commandsPerPage;
     }
 }

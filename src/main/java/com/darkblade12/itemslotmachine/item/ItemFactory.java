@@ -9,7 +9,6 @@ import java.util.List;
 
 public final class ItemFactory {
 
-    //    private static final String FORMAT = "(\\d+|[\\w\\s]+)(-\\d+){0,2}";
     private static final String FORMAT = "([0-9A-Z_]+)(-\\d+)?";
 
     private ItemFactory() {
@@ -32,7 +31,7 @@ public final class ItemFactory {
         return new ItemStack(m, 1);
     }
 
-    public static ItemStack fromString(String s) throws Exception {
+    public static ItemStack fromString(String s) {
         return fromString(s, true);
     }
 
@@ -52,10 +51,6 @@ public final class ItemFactory {
         meta.setLore(lore);
         i.setItemMeta(meta);
         return i;
-    }
-
-    public static ItemStack setLore(ItemStack i, String... lore) {
-        return setLore(i, Arrays.asList(lore));
     }
 
     private static ItemStack setNameAndLore(ItemStack i, String name, List<String> lore) {

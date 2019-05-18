@@ -1,6 +1,7 @@
 package com.darkblade12.itemslotmachine.nameable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public final class NameableList<T extends Nameable> extends ArrayList<T> {
 
@@ -21,11 +22,6 @@ public final class NameableList<T extends Nameable> extends ArrayList<T> {
         ignoreCase = false;
     }
 
-    public NameableList(Collection<T> c, boolean ignoreCase) {
-        super(c);
-        this.ignoreCase = ignoreCase;
-    }
-
     public void remove(String name) {
         for (int i = 0; i < size(); i++) {
             String n = get(i).getName();
@@ -36,8 +32,7 @@ public final class NameableList<T extends Nameable> extends ArrayList<T> {
     }
 
     public T get(String name) {
-        for (int i = 0; i < size(); i++) {
-            T e = get(i);
+        for (T e : this) {
             String n = e.getName();
             if (ignoreCase ? name.equalsIgnoreCase(n) : name.equals(n)) {
                 return e;
@@ -50,29 +45,11 @@ public final class NameableList<T extends Nameable> extends ArrayList<T> {
         return get(name) != null;
     }
 
-    public boolean ignoreCase() {
-        return ignoreCase;
-    }
-
-    private List<String> getNames() {
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < size(); i++) {
-            list.add(get(i).getName());
-        }
-        return list;
-    }
-
-    public List<String> getNames(Comparator<String> c) {
-        List<String> list = getNames();
-        Collections.sort(list, c);
-        return list;
-    }
-
-    public String toString(String seperator) {
+    public String toString(String separator) {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < size(); i++) {
             if (s.length() > 0) {
-                s.append(seperator);
+                s.append(separator);
             }
             s.append(get(i).toString());
         }

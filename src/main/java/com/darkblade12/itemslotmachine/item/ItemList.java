@@ -51,10 +51,9 @@ public final class ItemList extends ArrayList<ItemStack> implements Cloneable {
         return s >= i.getAmount();
     }
 
-    public boolean add(ItemStack e, boolean stack) {
+    private boolean add(ItemStack e, boolean stack) {
         if (stack) {
-            for (int i = 0; i < size(); i++) {
-                ItemStack s = get(i);
+            for (ItemStack s : this) {
                 if (s.isSimilar(e)) {
                     s.setAmount(s.getAmount() + e.getAmount());
                     return true;
@@ -115,17 +114,18 @@ public final class ItemList extends ArrayList<ItemStack> implements Cloneable {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < size(); i++) {
+        for (ItemStack itemStack : this) {
             if (s.length() > 0) {
                 s.append(", ");
             }
-            s.append(ItemFactory.toString(get(i)));
+            s.append(ItemFactory.toString(itemStack));
         }
         return s.toString();
     }
 
     @Override
     public ItemList clone() {
+        ItemList itemStacks = (ItemList) super.clone();
         return new ItemList(this);
     }
 }

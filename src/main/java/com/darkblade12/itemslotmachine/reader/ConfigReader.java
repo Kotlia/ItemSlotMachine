@@ -33,24 +33,11 @@ public final class ConfigReader extends FileReader {
         return config != null;
     }
 
-    public boolean saveConfig() {
-        try {
-            config.save(outputFile);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     private boolean saveDefaultConfig() {
         return saveResourceFile(plugin);
     }
 
     public void deleteConfig() {
         deleteFile();
-    }
-
-    public TemplateReader getTemplate() {
-        return template;
     }
 }

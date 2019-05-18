@@ -5,7 +5,6 @@ import com.darkblade12.itemslotmachine.slotmachine.combo.types.MoneyPotCombo;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public final class ComboList<T extends Combo> extends ArrayList<T> {
 
@@ -15,10 +14,6 @@ public final class ComboList<T extends Combo> extends ArrayList<T> {
 
     private ComboList() {
         super();
-    }
-
-    public ComboList(Collection<T> c) {
-        super(c);
     }
 
     public static ComboList<MoneyPotCombo> fromString1(String s) throws IllegalArgumentException {
@@ -60,11 +55,11 @@ public final class ComboList<T extends Combo> extends ArrayList<T> {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < size(); i++) {
+        for (T t : this) {
             if (s.length() > 0) {
                 s.append(";");
             }
-            s.append(get(i).toString());
+            s.append(t.toString());
         }
         return s.toString();
     }

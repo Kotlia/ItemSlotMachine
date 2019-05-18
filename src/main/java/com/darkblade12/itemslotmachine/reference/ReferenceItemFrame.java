@@ -69,28 +69,8 @@ public final class ReferenceItemFrame extends ReferenceLocation {
         }
     }
 
-    public void place(Player p) {
-        place(p.getLocation(), Direction.get(p));
-    }
-
-    public Direction getInitialFacing() {
-        return initialFacing;
-    }
-
-    public Direction getInitialDirection() {
-        return initialDirection;
-    }
-
-    public Block getAttachedBlock(Location c, Direction d) {
-        return getBukkitBlock(c, d).getRelative(rotate(d).getOppositeDirection().toBlockFace());
-    }
-
     public ItemFrame getBukkitItemFrame(Location c, Direction d) {
         return ItemFrameFinder.find(getBukkitLocation(c, d));
-    }
-
-    public ItemFrame getBukkitItemFrame(Player p) {
-        return getBukkitItemFrame(p.getLocation(), Direction.get(p));
     }
 
     public String toString(boolean direction) {

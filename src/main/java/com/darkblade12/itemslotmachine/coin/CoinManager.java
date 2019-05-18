@@ -113,12 +113,12 @@ public final class CoinManager extends Manager {
 
     private SafeLocation getLastShop(Player p) {
         String name = p.getName();
-        return lastShop.containsKey(name) ? lastShop.get(name) : null;
+        return lastShop.getOrDefault(name, null);
     }
 
     private int getShopCoins(Player p) {
         String name = p.getName();
-        return shopCoins.containsKey(name) ? shopCoins.get(name) : 1;
+        return shopCoins.getOrDefault(name, 1);
     }
 
     private boolean isShop(Sign s) {

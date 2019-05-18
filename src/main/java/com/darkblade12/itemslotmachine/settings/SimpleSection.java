@@ -12,8 +12,8 @@ import java.util.Map;
 
 public final class SimpleSection {
 
-    private String path;
-    private String name;
+    private final String path;
+    private final String name;
 
     public SimpleSection(String path) {
         this.path = path;
@@ -30,7 +30,7 @@ public final class SimpleSection {
         c.set(path + "." + name, o);
     }
 
-    public String getPath() {
+    private String getPath() {
         return this.path;
     }
 

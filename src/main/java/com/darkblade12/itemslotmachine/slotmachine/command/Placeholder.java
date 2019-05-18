@@ -21,8 +21,4 @@ public final class Placeholder {
     public String getName() {
         return name;
     }
-
-    public String getValue() {
-        return value;
-    }
 }

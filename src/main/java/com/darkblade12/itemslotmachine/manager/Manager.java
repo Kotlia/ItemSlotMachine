@@ -6,15 +6,15 @@ import org.bukkit.event.Listener;
 
 public abstract class Manager implements Listener {
 
-    protected ItemSlotMachine plugin;
+    protected final ItemSlotMachine plugin;
 
-    public Manager(ItemSlotMachine plugin) {
+    protected Manager(ItemSlotMachine plugin) {
         this.plugin = plugin;
     }
 
-    public abstract boolean onInitialize();
+    protected abstract boolean onInitialize();
 
-    public abstract void onDisable();
+    protected abstract void onDisable();
 
     public boolean onReload() {
         onDisable();

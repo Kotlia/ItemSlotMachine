@@ -122,7 +122,7 @@ public final class ItemSlotMachine extends JavaPlugin {
                 m.start();
             }
         } catch (Exception e) {
-            l.info("An error occured while enabling Metrics!");
+            l.info("An error occurred while enabling Metrics!");
             if (Settings.isDebugModeEnabled()) {
                 e.printStackTrace();
             }

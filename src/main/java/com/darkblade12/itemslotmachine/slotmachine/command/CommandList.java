@@ -25,14 +25,13 @@ public final class CommandList extends ArrayList<String> implements Cloneable {
         }
         CommandList list = new CommandList();
         for (String c : s.split(";")) {
-            list.add(c.startsWith("/") ? c.substring(1, c.length()) : c);
+            list.add(c.startsWith("/") ? c.substring(1) : c);
         }
         return list;
     }
 
-    public void execute(CommandSender sender, Placeholder... placeholders) {
-        for (int i = 0; i < size(); i++) {
-            String command = get(i);
+    private void execute(CommandSender sender, Placeholder... placeholders) {
+        for (String command : this) {
             for (Placeholder p : placeholders) {
                 command = p.replace(command);
             }
@@ -47,17 +46,18 @@ public final class CommandList extends ArrayList<String> implements Cloneable {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < size(); i++) {
+        for (String value : this) {
             if (s.length() > 0) {
                 s.append(";");
             }
-            s.append(get(i));
+            s.append(value);
         }
         return s.toString();
     }
 
     @Override
     public CommandList clone() {
+        CommandList strings = (CommandList) super.clone();
         return new CommandList(this);
     }
 }

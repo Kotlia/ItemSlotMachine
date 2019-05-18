@@ -1,7 +1,5 @@
 package com.darkblade12.itemslotmachine.util;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,27 +29,8 @@ public final class ReflectionUtil {
     private ReflectionUtil() {
     }
 
-    public static class FieldEntry {
-
-        String key;
-        Object value;
-
-        public FieldEntry(String key, Object value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-    }
-
     private static Class<?> getPrimitiveType(Class<?> clazz) {
-        return CORRESPONDING_TYPES.containsKey(clazz) ? CORRESPONDING_TYPES.get(clazz) : clazz;
+        return CORRESPONDING_TYPES.getOrDefault(clazz, clazz);
     }
 
     private static Class<?>[] toPrimitiveTypeArray(Object[] objects) {
@@ -84,22 +63,7 @@ public final class ReflectionUtil {
         return true;
     }
 
-    public static Constructor<?> getConstructor(Class<?> clazz, Class<?>... paramTypes) {
-        Class<?>[] t = toPrimitiveTypeArray(paramTypes);
-        for (Constructor<?> c : clazz.getConstructors()) {
-            Class<?>[] types = toPrimitiveTypeArray(c.getParameterTypes());
-            if (equalsTypeArray(types, t)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    public static Object newInstance(Class<?> clazz, Object... args) throws Exception {
-        return getConstructor(clazz, toPrimitiveTypeArray(args)).newInstance(args);
-    }
-
-    public static Method getMethod(String name, Class<?> clazz, Class<?>... paramTypes) {
+    private static Method getMethod(String name, Class<?> clazz, Class<?>... paramTypes) {
         Class<?>[] t = toPrimitiveTypeArray(paramTypes);
         for (Method m : clazz.getMethods()) {
             Class<?>[] types = toPrimitiveTypeArray(m.getParameterTypes());
@@ -112,27 +76,5 @@ public final class ReflectionUtil {
 
     public static Object invokeMethod(String name, Class<?> clazz, Object obj, Object... args) throws Exception {
         return getMethod(name, clazz, toPrimitiveTypeArray(args)).invoke(obj, args);
-    }
-
-    public static Field getField(String name, Class<?> clazz) throws Exception {
-        return clazz.getDeclaredField(name);
-    }
-
-    public static Object getValue(String name, Object obj) throws Exception {
-        Field f = getField(name, obj.getClass());
-        f.setAccessible(true);
-        return f.get(obj);
-    }
-
-    public static void setValue(Object obj, FieldEntry entry) throws Exception {
-        Field f = getField(entry.getKey(), obj.getClass());
-        f.setAccessible(true);
-        f.set(obj, entry.getValue());
-    }
-
-    public static void setValues(Object obj, FieldEntry... entrys) throws Exception {
-        for (FieldEntry f : entrys) {
-            setValue(obj, f);
-        }
     }
 }

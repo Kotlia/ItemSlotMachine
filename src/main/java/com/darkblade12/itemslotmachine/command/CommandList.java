@@ -17,9 +17,7 @@ public class CommandList extends ArrayList<ICommand> {
 
     public CommandList(Collection<ICommand> c) {
         this();
-        for (ICommand i : c) {
-            add(i);
-        }
+        addAll(c);
     }
 
     @Override
