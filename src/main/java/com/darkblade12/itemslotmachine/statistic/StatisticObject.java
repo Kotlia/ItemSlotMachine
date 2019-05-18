@@ -72,7 +72,6 @@ public final class StatisticObject implements Nameable, Cloneable, Comparable<St
 
     @Override
     public StatisticObject clone() {
-        StatisticObject statisticObject = (StatisticObject) super.clone();
         return new StatisticObject(type, value);
     }
 }

@@ -75,7 +75,6 @@ public final class SafeLocation implements Cloneable {
 
     @Override
     public SafeLocation clone() {
-        SafeLocation safeLocation = (SafeLocation) super.clone();
         return new SafeLocation(worldName, x, y, z);
     }
 }

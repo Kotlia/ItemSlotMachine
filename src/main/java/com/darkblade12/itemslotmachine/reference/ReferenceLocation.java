@@ -104,7 +104,6 @@ public class ReferenceLocation {
 
     @Override
     public ReferenceLocation clone() {
-        ReferenceLocation referenceLocation = (ReferenceLocation) super.clone();
         return new ReferenceLocation(l, f, u);
     }
 }
