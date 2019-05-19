@@ -174,12 +174,12 @@ public final class Design implements Nameable {
         int i = 0;
         for (ReferenceBlock r : blocks) {
             if (i > 0) {
-                s.append(", ");
+                s.append("~");
             }
             s.append(r.toString(false));
             i++;
         }
-        s.append("#").append(itemFrames[0].toString(false)).append(", ").append(itemFrames[1].toString(false)).append(", ").append(itemFrames[2].toString(false)).append("#").append(sign.toString(false)).append("#").append(slot.toString(false)).append("#").append(region).append("#").append(initialDirection.name());
+        s.append("#").append(itemFrames[0].toString(false)).append("~").append(itemFrames[1].toString(false)).append("~").append(itemFrames[2].toString(false)).append("#").append(sign.toString(false)).append("#").append(slot.toString(false)).append("#").append(region).append("#").append(initialDirection.name());
         return s.toString();
     }
 }

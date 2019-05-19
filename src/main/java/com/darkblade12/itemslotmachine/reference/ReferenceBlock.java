@@ -58,7 +58,7 @@ public final class ReferenceBlock extends ReferenceLocation {
     }
 
     public String toString(boolean direction) {
-        return super.toString() + "@" + blockData.toString() + (direction ? "@" + initialDirection : "");
+        return super.toString() + "@" + blockData.getAsString() + (direction ? "@" + initialDirection : "");
     }
 
     @Override
