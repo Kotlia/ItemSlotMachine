@@ -7,7 +7,7 @@ ItemSlotMachine adds realistic slot machines to your server that have a display 
 	<li>Vault is an optional dependency</li>
 	<li>You can create and manage own slot machine designs (default design is included)</li>
 	<li>Template for creating slot machine configs which doesn't have to be reloaded</li>
-	<li>You can build an infinite number of slot machine</li>
+	<li>You can build an infinite number of slot machines</li>
 	<li>Many commands for managing slot machines</li>
 	<li>Every slot machine has its own config file</li>
 	<li>Statistics for slot machines and players which can be displayed normally or as a top ten list</li>

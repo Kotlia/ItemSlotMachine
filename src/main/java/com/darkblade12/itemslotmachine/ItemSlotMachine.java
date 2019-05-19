@@ -2,6 +2,7 @@ package com.darkblade12.itemslotmachine;
 
 import com.darkblade12.itemslotmachine.coin.CoinManager;
 import com.darkblade12.itemslotmachine.command.coin.CoinCommandHandler;
+import com.darkblade12.itemslotmachine.command.design.DesignCommandHandler;
 import com.darkblade12.itemslotmachine.command.slot.SlotCommandHandler;
 import com.darkblade12.itemslotmachine.command.statistic.StatisticCommandHandler;
 import com.darkblade12.itemslotmachine.design.DesignManager;
@@ -27,6 +28,7 @@ public final class ItemSlotMachine extends JavaPlugin {
     private VaultHook vaultHook;
     public MessageManager messageManager;
     public DesignManager designManager;
+    public DesignCommandHandler designCommandHandler;
     public CoinManager coinManager;
     public SlotMachineManager slotMachineManager;
     public StatisticManager statisticManager;
@@ -67,7 +69,7 @@ public final class ItemSlotMachine extends JavaPlugin {
         coinManager = new CoinManager(this);
         slotMachineManager = new SlotMachineManager(this);
         statisticManager = new StatisticManager(this);
-//        DesignCommandHandler designCommandHandler = new DesignCommandHandler(this);
+        designCommandHandler = new DesignCommandHandler(this);
         coinCommandHandler = new CoinCommandHandler(this);
         slotCommandHandler = new SlotCommandHandler(this);
         statisticCommandHandler = new StatisticCommandHandler(this);
