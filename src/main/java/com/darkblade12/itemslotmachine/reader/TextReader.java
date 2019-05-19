@@ -6,7 +6,6 @@ import org.bukkit.plugin.Plugin;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public final class TextReader extends FileReader {
             return null;
         }
         List<String> lines = new ArrayList<>();
-        BufferedReader b = new BufferedReader(new InputStreamReader(new FileInputStream(outputFile), StandardCharsets.UTF_8));
+        BufferedReader b = new BufferedReader(new InputStreamReader(new FileInputStream(outputFile), "UTF-8"));
         for (String line = b.readLine(); line != null; line = b.readLine()) {
             lines.add(StringEscapeUtils.unescapeJava(line));
         }
