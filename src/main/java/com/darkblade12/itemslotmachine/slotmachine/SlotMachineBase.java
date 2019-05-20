@@ -61,21 +61,12 @@ public abstract class SlotMachineBase implements Nameable {
     Design design;
     SafeLocation center;
     Direction initialDirection;
-    private SafeLocation sign;
     SafeLocation slot;
-    private Cuboid region;
     int activationAmount;
-    private ItemList itemIcons;
-    private boolean creativeUsageEnabled;
     boolean fireworksEnabled;
-    private boolean individualPermissionEnabled;
-    private String individualPermission;
     int[] haltTickDelay;
     boolean automaticHaltEnabled;
     int automaticHaltTicks;
-    private boolean predeterminedWinningChanceEnabled;
-    private int predeterminedWinningChanceMin;
-    private int predeterminedWinningChanceMax;
     boolean tickingSoundsEnabled;
     boolean tickingSoundsBroadcast;
     SoundList tickingSounds;
@@ -87,25 +78,34 @@ public abstract class SlotMachineBase implements Nameable {
     SoundList loseSounds;
     boolean playerLockEnabled;
     int playerLockTime;
-    private boolean commandExecutionEnabled;
-    private CommandList commands;
     boolean moneyPotEnabled;
-    private double moneyPotDefaultSize;
-    private double moneyPotRaise;
     boolean moneyPotHouseCutEnabled;
     boolean moneyPotHouseCutPercentage;
     double moneyPotHouseCutAmount;
-    private boolean moneyPotCombosEnabled;
     ComboList<MoneyPotCombo> moneyPotCombos;
     boolean itemPotEnabled;
-    private ItemList itemPotDefaultItems;
-    private ItemList itemPotRaise;
     boolean itemPotHouseCutEnabled;
     int itemPotHouseCutAmount;
-    private boolean itemPotCombosEnabled;
     ComboList<ItemPotCombo> itemPotCombos;
     double moneyPot;
     ItemList itemPot;
+    private SafeLocation sign;
+    private Cuboid region;
+    private ItemList itemIcons;
+    private boolean creativeUsageEnabled;
+    private boolean individualPermissionEnabled;
+    private String individualPermission;
+    private boolean predeterminedWinningChanceEnabled;
+    private int predeterminedWinningChanceMin;
+    private int predeterminedWinningChanceMax;
+    private boolean commandExecutionEnabled;
+    private CommandList commands;
+    private double moneyPotDefaultSize;
+    private double moneyPotRaise;
+    private boolean moneyPotCombosEnabled;
+    private ItemList itemPotDefaultItems;
+    private ItemList itemPotRaise;
+    private boolean itemPotCombosEnabled;
 
     SlotMachineBase(ItemSlotMachine plugin, String name) throws Exception {
         this.plugin = plugin;
@@ -145,6 +145,10 @@ public abstract class SlotMachineBase implements Nameable {
             itemPot = p.length == 5 ? ItemList.fromString(p[4]) : new ItemList();
         }
         updateSign();
+    }
+
+    private static boolean isRegularWin(ItemStack[] icons) {
+        return icons[0].isSimilar(icons[1]) && icons[1].isSimilar(icons[2]);
     }
 
     private void loadSettings() throws InvalidValueException {
@@ -401,11 +405,6 @@ public abstract class SlotMachineBase implements Nameable {
         }
     }
 
-    public void setMoneyPot(double moneyPot) {
-        this.moneyPot = moneyPot < 0 ? 0 : moneyPot;
-        update();
-    }
-
     public void setItemPot(ItemList itemPot) {
         this.itemPot = itemPot.clone();
         update();
@@ -452,10 +451,6 @@ public abstract class SlotMachineBase implements Nameable {
     public void clearItemPot() {
         itemPot.clear();
         update();
-    }
-
-    private static boolean isRegularWin(ItemStack[] icons) {
-        return icons[0].isSimilar(icons[1]) && icons[1].isSimilar(icons[2]);
     }
 
     private boolean isMoneyPotComboWin(ItemStack[] icons) {
@@ -629,14 +624,6 @@ public abstract class SlotMachineBase implements Nameable {
         return design;
     }
 
-    public SafeLocation getCenter() {
-        return center.clone();
-    }
-
-    public Direction getInitialDirection() {
-        return initialDirection;
-    }
-
     ItemFrame[] getItemFrameInstances() {
         ItemFrame[] frames = new ItemFrame[3];
         Location l = center.getBukkitLocation();
@@ -650,6 +637,14 @@ public abstract class SlotMachineBase implements Nameable {
         }
         return frames;
     }
+
+//    public SafeLocation getCenter() {
+//        return center.clone();
+//    }
+
+//    public Direction getInitialDirection() {
+//        return initialDirection;
+//    }
 
     SafeLocation getSign() {
         return sign.clone();
@@ -671,13 +666,13 @@ public abstract class SlotMachineBase implements Nameable {
         return slot.noDistance(l);
     }
 
-    public Cuboid getRegion() {
-        return region;
-    }
-
     boolean isInsideRegion(Location l) {
         return region.isInside(l);
     }
+
+//    public Cuboid getRegion() {
+//        return region;
+//    }
 
     int getActivationAmount() {
         return activationAmount;
@@ -702,13 +697,13 @@ public abstract class SlotMachineBase implements Nameable {
         return false;
     }
 
-    public ItemList getItemIcons() {
-        return itemIcons.clone();
-    }
-
     ItemStack getRandomIcon() {
         return itemIcons.get(RANDOM.nextInt(itemIcons.size()));
     }
+
+//    public ItemList getItemIcons() {
+//        return itemIcons.clone();
+//    }
 
     private ItemStack[] getRandomIcons() {
         return new ItemStack[]{getRandomIcon(), getRandomIcon(), getRandomIcon()};
@@ -718,76 +713,81 @@ public abstract class SlotMachineBase implements Nameable {
         return creativeUsageEnabled;
     }
 
-    public boolean hasFireworksEnabled() {
-        return fireworksEnabled;
-    }
-
-    public boolean isIndividualPermissionEnabled() {
-        return individualPermissionEnabled;
-    }
-
-    public String getIndividualPermission() {
-        return individualPermission;
-    }
-
-    public int[] getHaltTickDelay() {
-        return haltTickDelay.clone();
-    }
-
-    public boolean isAutomaticHaltEnabled() {
-        return automaticHaltEnabled;
-    }
-
-    public int getAutomaticHaltTicks() {
-        return automaticHaltTicks;
-    }
-
-    public boolean isPredeterminedWinningChanceEnabled() {
-        return predeterminedWinningChanceEnabled;
-    }
-
     boolean isPlayerLockEnabled() {
         return playerLockEnabled;
     }
 
-    public int getPlayerLockTime() {
-        return playerLockTime;
-    }
+//    public boolean hasFireworksEnabled() {
+//        return fireworksEnabled;
+//    }
 
-    public boolean isCommandExecutionEnabled() {
-        return commandExecutionEnabled;
-    }
+//    public boolean isIndividualPermissionEnabled() {
+//        return individualPermissionEnabled;
+//    }
 
-    public CommandList getCommands() {
-        return commands.clone();
-    }
+//    public String getIndividualPermission() {
+//        return individualPermission;
+//    }
+
+//    public int[] getHaltTickDelay() {
+//        return haltTickDelay.clone();
+//    }
+
+//    public boolean isAutomaticHaltEnabled() {
+//        return automaticHaltEnabled;
+//    }
+
+//    public int getAutomaticHaltTicks() {
+//        return automaticHaltTicks;
+//    }
+
+//    public boolean isPredeterminedWinningChanceEnabled() {
+//        return predeterminedWinningChanceEnabled;
+//    }
 
     public boolean isMoneyPotEnabled() {
         return moneyPotEnabled;
     }
 
-    public double getMoneyPotDefaultSize() {
-        return moneyPotDefaultSize;
-    }
+//    public int getPlayerLockTime() {
+//        return playerLockTime;
+//    }
 
-    public double getMoneyPotRaise() {
-        return moneyPotRaise;
-    }
+//    public boolean isCommandExecutionEnabled() {
+//        return commandExecutionEnabled;
+//    }
+
+//    public CommandList getCommands() {
+//        return commands.clone();
+//    }
 
     public boolean isItemPotEnabled() {
         return itemPotEnabled;
     }
 
-    public ItemList getItemPotDefaultItems() {
-        return itemPotDefaultItems.clone();
-    }
+//    public double getMoneyPotDefaultSize() {
+//        return moneyPotDefaultSize;
+//    }
 
-    public ItemList getItemPotRaise() {
-        return itemPotRaise.clone();
-    }
+//    public double getMoneyPotRaise() {
+//        return moneyPotRaise;
+//    }
 
     public double getMoneyPot() {
         return moneyPot;
+    }
+
+//    public ItemList getItemPotDefaultItems() {
+//        return itemPotDefaultItems.clone();
+//    }
+
+//    public ItemList getItemPotRaise() {
+//        return itemPotRaise.clone();
+//    }
+
+    public void setMoneyPot(double moneyPot) {
+        this.moneyPot = moneyPot < 0 ? 0 : moneyPot;
+        update();
     }
 
     public boolean isMoneyPotEmpty() {
@@ -798,9 +798,9 @@ public abstract class SlotMachineBase implements Nameable {
         return moneyPotCombosEnabled && moneyPotEnabled && VaultHook.isEnabled();
     }
 
-    public ItemList getItemPot() {
-        return itemPot.clone();
-    }
+//    public ItemList getItemPot() {
+//        return itemPot.clone();
+//    }
 
     public boolean isItemPotEmpty() {
         return itemPot.size() == 0;
