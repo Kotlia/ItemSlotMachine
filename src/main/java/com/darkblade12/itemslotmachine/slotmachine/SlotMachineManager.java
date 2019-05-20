@@ -28,6 +28,7 @@ import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
@@ -79,6 +80,20 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
         return Settings.getDefaultSlotMachineName().replace("<num>", Integer.toString(n));
     }
 
+    @Override
+    public Set<String> getNames() {
+        Set<String> names = new HashSet<>();
+        if (DIRECTORY.exists() && DIRECTORY.isDirectory()) {
+            for (File f : DIRECTORY.listFiles()) {
+                String name = f.getName();
+                if (name.endsWith(".yml")) {
+                    names.add(name.replace(".yml", ""));
+                }
+            }
+        }
+        return names;
+    }
+
     private void sort() {
         slotMachines.sort(comparator);
     }
@@ -123,20 +138,6 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
                 s.deactivate();
             }
         }
-    }
-
-    @Override
-    public Set<String> getNames() {
-        Set<String> names = new HashSet<>();
-        if (DIRECTORY.exists() && DIRECTORY.isDirectory()) {
-            for (File f : DIRECTORY.listFiles()) {
-                String name = f.getName();
-                if (name.endsWith(".yml")) {
-                    names.add(name.replace(".yml", ""));
-                }
-            }
-        }
-        return names;
     }
 
     public boolean hasName(String name) {
@@ -295,7 +296,7 @@ public final class SlotMachineManager extends Manager implements NameGenerator {
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player p = event.getPlayer();
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getHand().equals(EquipmentSlot.HAND)) {
             ItemStack h = p.getInventory().getItemInMainHand();
             Location l = event.getClickedBlock().getLocation();
             SlotMachine s = getSlotMachine(l);
