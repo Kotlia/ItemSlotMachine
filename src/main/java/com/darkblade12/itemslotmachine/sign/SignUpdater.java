@@ -39,7 +39,7 @@ public final class SignUpdater {
         for (int s : splittable) {
             if (s >= 0 && s < lines.length - 1) {
                 String a = lines[s];
-                if (a.length() > 15) {
+                if (a.length() > 16) {
                     String[] p = a.split(" ");
                     lines[s] = p[0];
                     lines[s + 1] = p[1];
@@ -48,7 +48,8 @@ public final class SignUpdater {
         }
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];
-            lines[i] = line.length() > 15 ? line.substring(0, 15) : line;
+            lines[i] = line.length() > 16 ? line.substring(0, 16) : line;
+            System.out.println("After Line " + i + ":" + lines[i]);
         }
         return lines;
     }
