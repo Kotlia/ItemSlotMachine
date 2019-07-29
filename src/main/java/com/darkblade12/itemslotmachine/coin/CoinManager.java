@@ -8,7 +8,6 @@ import com.darkblade12.itemslotmachine.settings.Settings;
 import com.darkblade12.itemslotmachine.sign.SignUpdater;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +21,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,6 +35,10 @@ public final class CoinManager extends Manager {
     public CoinManager(ItemSlotMachine plugin) {
         super(plugin);
         onInitialize();
+    }
+
+    public static double calculatePrice(int coins) {
+        return coins * Settings.getCoinPrice();
     }
 
     @Override
@@ -71,10 +73,6 @@ public final class CoinManager extends Manager {
     public void onDisable() {
         task.cancel();
         unregisterAll();
-    }
-
-    public static double calculatePrice(int coins) {
-        return coins * Settings.getCoinPrice();
     }
 
     private void updateShop(Player p, Location l, int coins) {
@@ -127,7 +125,7 @@ public final class CoinManager extends Manager {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onSignChange(SignChangeEvent event) {
-        if (event.getLine(0).equalsIgnoreCase("[CoinShop]")) {
+        if (event.getLine(0).equalsIgnoreCase("[CoinShop]")) { // will never work as first line contains colour codes and maybe in another language...
             String[] lines = SignUpdater.validateLines(new String[]{plugin.messageManager.sign_coin_shop_header(), plugin.messageManager.sign_coin_shop_coins(1), plugin.messageManager.sign_coin_shop_price(Settings.getCoinPrice()), plugin.messageManager.sign_coin_shop_spacer()}, 2);
             event.setLine(0, lines[0]);
             event.setLine(1, lines[1]);
@@ -144,8 +142,8 @@ public final class CoinManager extends Manager {
             Player p = event.getPlayer();
             Sign s;
             try {
-                HashSet<Material> ignore = null;
-                s = (Sign) p.getTargetBlock(ignore, 6).getState();
+//                HashSet<Material> ignore = null;
+                s = (Sign) p.getTargetBlock(null, 6).getState();
                 if (!isShop(s)) {
                     return;
                 }

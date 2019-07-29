@@ -32,8 +32,6 @@ public final class MessageManager extends Manager implements MessageContainer {
     private static final String[] DICES = new String[]{"\u2680", "\u2681", "\u2682", "\u2683", "\u2684", "\u2685"};
     private static final String TRUE = "§a\u2714";
     private static final String FALSE = "§c\u2718";
-    private TextReader textReader;
-    private Map<String, String> messages;
 
     static {
         EQUAL_COLOR_CODES.put("§1", "§9");
@@ -55,8 +53,73 @@ public final class MessageManager extends Manager implements MessageContainer {
         NUMBER_SYMBOLS.put(10, "§f\u277F");
     }
 
+    private TextReader textReader;
+    private Map<String, String> messages;
+
     public MessageManager(ItemSlotMachine plugin) {
         super(plugin);
+    }
+
+    private static String randomColorCode() {
+        return "§" + COLOR_CODE_MODIFIERS[RANDOM.nextInt(COLOR_CODE_MODIFIERS.length)];
+    }
+
+    private static String equalColorCode(String c) {
+        for (Entry<String, String> e : EQUAL_COLOR_CODES.entrySet()) {
+            String k = e.getKey();
+            String v = e.getValue();
+            if (k.equals(c)) {
+                return v;
+            } else if (v.equals(c)) {
+                return k;
+            }
+        }
+        throw new IllegalArgumentException("Invalid color code");
+    }
+
+    private static String getSymbol(int number) {
+        return NUMBER_SYMBOLS.get(number);
+    }
+
+    private static String randomDice() {
+        return DICES[RANDOM.nextInt(DICES.length)];
+    }
+
+    private static String designsToString(List<Design> list) {
+        StringBuilder s = new StringBuilder();
+        for (Design d : list) {
+            s.append("\n§r §7\u25C9 ").append(randomColorCode()).append(d.getName());
+        }
+        return s.toString();
+    }
+
+    private static String slotMachinesToString(List<SlotMachine> list) {
+        StringBuilder s = new StringBuilder();
+        for (SlotMachine m : list) {
+            s.append("\n§r §6\u25C9 §2").append(m.getName()).append(" §7\u25BB §eActive: ").append(m.isActive() ? TRUE : FALSE);
+        }
+        return s.toString();
+    }
+
+    private static String formatEnumName(String name) {
+        StringBuilder s = new StringBuilder();
+        String[] p = name.split("_");
+        for (String value : p) {
+            if (s.length() > 0) {
+                s.append(" ");
+            }
+            s.append(Character.toUpperCase(value.charAt(0)) + value.substring(1).toLowerCase());
+        }
+        return s.toString();
+    }
+
+    private static String getItemName(ItemStack item) {
+        Material m = item.getType();
+        return formatEnumName(m.name());
+    }
+
+    private static String itemToString(ItemStack item) {
+        return (item.hasItemMeta() && item.getItemMeta().hasDisplayName() ? item.getItemMeta().getDisplayName() : "§2" + getItemName(item)) + " §8\u00D7 §7" + item.getAmount();
     }
 
     @Override
@@ -96,77 +159,17 @@ public final class MessageManager extends Manager implements MessageContainer {
         return true;
     }
 
-    private static String randomColorCode() {
-        return "§" + COLOR_CODE_MODIFIERS[RANDOM.nextInt(COLOR_CODE_MODIFIERS.length)];
-    }
-
-    private static String equalColorCode(String c) {
-        for (Entry<String, String> e : EQUAL_COLOR_CODES.entrySet()) {
-            String k = e.getKey();
-            String v = e.getValue();
-            if (k.equals(c)) {
-                return v;
-            } else if (v.equals(c)) {
-                return k;
-            }
-        }
-        throw new IllegalArgumentException("Invalid color code");
-    }
-
-    private static String getSymbol(int number) {
-        return NUMBER_SYMBOLS.get(number);
-    }
-
-    private static String randomDice() {
-        return DICES[RANDOM.nextInt(DICES.length)];
-    }
-
     public String getMessage(String name) {
         if (!messages.containsKey(name)) {
             return "§cMessage not available, please check your language file! §8(§7Message name: §6" + name + "§8)";
         }
-        return messages.get(name);
+        String message = messages.get(name);
+        System.out.println("Message :" + message);
+        return message;
     }
 
     private String getMessage(String name, boolean prefix) {
         return (prefix ? plugin_prefix() : "") + getMessage(name);
-    }
-
-    private static String designsToString(List<Design> list) {
-        StringBuilder s = new StringBuilder();
-        for (Design d : list) {
-            s.append("\n§r §7\u25C9 ").append(randomColorCode()).append(d.getName());
-        }
-        return s.toString();
-    }
-
-    private static String slotMachinesToString(List<SlotMachine> list) {
-        StringBuilder s = new StringBuilder();
-        for (SlotMachine m : list) {
-            s.append("\n§r §6\u25C9 §2").append(m.getName()).append(" §7\u25BB §eActive: ").append(m.isActive() ? TRUE : FALSE);
-        }
-        return s.toString();
-    }
-
-    private static String formatEnumName(String name) {
-        StringBuilder s = new StringBuilder();
-        String[] p = name.split("_");
-        for (String value : p) {
-            if (s.length() > 0) {
-                s.append(" ");
-            }
-            s.append(Character.toUpperCase(value.charAt(0)) + value.substring(1).toLowerCase());
-        }
-        return s.toString();
-    }
-
-    private static String getItemName(ItemStack item) {
-        Material m = item.getType();
-        return formatEnumName(m.name());
-    }
-
-    private static String itemToString(ItemStack item) {
-        return (item.hasItemMeta() && item.getItemMeta().hasDisplayName() ? item.getItemMeta().getDisplayName() : "§2" + getItemName(item)) + " §8\u00D7 §7" + item.getAmount();
     }
 
     public String itemsToString(ItemList items, String colors) {
@@ -228,10 +231,6 @@ public final class MessageManager extends Manager implements MessageContainer {
     @Override
     public String plugin_reloaded(String version, long time) {
         return getMessage("plugin_reloaded", true).replace("<version>", version).replace("<time>", Long.toString(time));
-    }
-
-    public String plugin_reloaded(long time) {
-        return plugin_reloaded(plugin.getDescription().getVersion(), time);
     }
 
     @Override
@@ -349,10 +348,6 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("design_list", true).replace("<list>", list);
     }
 
-    public String design_list() {
-        return design_list(designsToString(plugin.designManager.getDesigns()));
-    }
-
     @Override
     public String design_not_modifiable() {
         return getMessage("design_not_modifiable", true);
@@ -388,17 +383,9 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("coin_purchase_not_enough_money", true).replace("<coins>", Integer.toString(coins)).replace("<price>", Double.toString(price)).replace("<currency_name>", currencyName);
     }
 
-    public String coin_purchase_not_enough_money(int coins, double price) {
-        return coin_purchase_not_enough_money(coins, price, price == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural());
-    }
-
     @Override
     public String coin_purchase(int coins, double price, String currencyName) {
         return getMessage("coin_purchase", true).replace("<coins>", Integer.toString(coins)).replace("<price>", Double.toString(price)).replace("<currency_name>", currencyName);
-    }
-
-    public String coin_purchase(int coins, double price) {
-        return coin_purchase(coins, price, price == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural());
     }
 
     @Override
@@ -432,13 +419,13 @@ public final class MessageManager extends Manager implements MessageContainer {
     }
 
     @Override
-    public String slot_machine_still_active() {
-        return getMessage("slot_machine_still_active", true);
+    public String slot_machine_broken() {
+        return getMessage("slot_machine_broken", true);
     }
 
     @Override
-    public String slot_machine_broken() {
-        return getMessage("slot_machine_broken", true);
+    public String slot_machine_still_active() {
+        return getMessage("slot_machine_still_active", true);
     }
 
     @Override
@@ -456,10 +443,6 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("slot_machine_limited_usage", true).replace("<amount>", Integer.toString(amount));
     }
 
-    public String slot_machine_limited_usage() {
-        return slot_machine_limited_usage(Settings.getLimitedUsageAmount());
-    }
-
     @Override
     public String slot_machine_locked(String player, int seconds) {
         return getMessage("slot_machine_locked", true).replace("<player>", player).replace("<seconds>", seconds < 0 ? "N/A" : Integer.toString(seconds));
@@ -468,16 +451,6 @@ public final class MessageManager extends Manager implements MessageContainer {
     @Override
     public String slot_machine_won(double money, String currencyName, int itemAmount, String items) {
         return getMessage("slot_machine_won", true).replace("<money>", Double.toString(money)).replace("<currency_name>", currencyName).replace("<item_amount>", Integer.toString(itemAmount)).replace("<items>", items);
-    }
-
-    public String slot_machine_won(double money, ItemList items) {
-        String message = getMessage("slot_machine_won");
-        int index = message.indexOf("<items>");
-        String currency = "money";
-        if (VaultHook.isEnabled()) {
-            currency = money == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural();
-        }
-        return slot_machine_won(money, currency, items.size(), index == -1 ? "" : itemsToString(items, ChatColor.getLastColors(message.substring(0, index))));
     }
 
     @Override
@@ -518,10 +491,6 @@ public final class MessageManager extends Manager implements MessageContainer {
     @Override
     public String slot_machine_list(String list) {
         return getMessage("slot_machine_list", true).replace("<list>", list);
-    }
-
-    public String slot_machine_list() {
-        return slot_machine_list(slotMachinesToString(plugin.slotMachineManager.getSlotMachines()));
     }
 
     @Override
@@ -574,17 +543,9 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("slot_machine_money_pot_deposit", true).replace("<money>", Double.toString(money)).replace("<currency_name>", currencyName).replace("<name>", name).replace("<pot>", Double.toString(pot));
     }
 
-    public String slot_machine_money_pot_deposit(double money, String name, double pot) {
-        return slot_machine_money_pot_deposit(money, VaultHook.ECONOMY.currencyNamePlural(), name, pot);
-    }
-
     @Override
     public String slot_machine_money_pot_withdraw(double money, String currencyName, String name, double pot) {
         return getMessage("slot_machine_money_pot_withdraw", true).replace("<money>", Double.toString(money)).replace("<currency_name>", currencyName).replace("<name>", name).replace("<pot>", Double.toString(pot));
-    }
-
-    public String slot_machine_money_pot_withdraw(double money, String name, double pot) {
-        return slot_machine_money_pot_withdraw(money, VaultHook.ECONOMY.currencyNamePlural(), name, pot);
     }
 
     @Override
@@ -592,17 +553,9 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("slot_machine_money_pot_set", true).replace("<name>", name).replace("<money>", Double.toString(money)).replace("<currency_name>", currencyName);
     }
 
-    public String slot_machine_money_pot_set(String name, double money) {
-        return slot_machine_money_pot_set(name, money, money == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural());
-    }
-
     @Override
     public String slot_machine_money_pot_reset(String name, double pot, String currencyName) {
         return getMessage("slot_machine_money_pot_reset", true).replace("<name>", name).replace("<pot>", Double.toString(pot)).replace("<currency_name>", currencyName);
-    }
-
-    public String slot_machine_money_pot_reset(String name, double pot) {
-        return slot_machine_money_pot_reset(name, pot, pot == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural());
     }
 
     @Override
@@ -630,19 +583,9 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("slot_machine_item_pot_deposit", true).replace("<item>", item).replace("<name>", name);
     }
 
-    public String slot_machine_item_pot_deposit(ItemStack item, String name) {
-        return slot_machine_item_pot_deposit(itemToString(item), name);
-    }
-
     @Override
     public String slot_machine_item_pot_deposit_multiple(String items, String name) {
         return getMessage("slot_machine_item_pot_deposit_multiple", true).replace("<items>", items).replace("<name>", name);
-    }
-
-    public String slot_machine_item_pot_deposit_multiple(ItemList items, String name) {
-        String message = getMessage("slot_machine_item_pot_deposit_multiple");
-        int index = message.indexOf("<items>");
-        return slot_machine_item_pot_deposit_multiple(index == -1 ? "" : itemsToString(items, ChatColor.getLastColors(message.substring(0, index))), name);
     }
 
     @Override
@@ -650,21 +593,9 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("slot_machine_item_pot_set", true).replace("<name>", name).replace("<items>", items);
     }
 
-    public String slot_machine_item_pot_set(String name, ItemList items) {
-        String message = getMessage("slot_machine_item_pot_set");
-        int index = message.indexOf("<items>");
-        return slot_machine_item_pot_set(name, index == -1 ? "" : itemsToString(items, ChatColor.getLastColors(message.substring(0, index))));
-    }
-
     @Override
     public String slot_machine_item_pot_reset(String name, String items) {
         return getMessage("slot_machine_item_pot_reset", true).replace("<name>", name).replace("<items>", items);
-    }
-
-    public String slot_machine_item_pot_reset(String name, ItemList items) {
-        String message = getMessage("slot_machine_item_pot_reset");
-        int index = message.indexOf("<items>");
-        return slot_machine_item_pot_reset(name, index == -1 ? "" : itemsToString(items, ChatColor.getLastColors(message.substring(0, index))));
     }
 
     @Override
@@ -687,22 +618,14 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("statistic_show_slot_machine", true).replace("<name>", name).replace("<statistic>", statistic);
     }
 
-    public String statistic_show_slot_machine(String name, SlotMachineStatistic statistic) {
-        return statistic_show_slot_machine(name, statisticToString(statistic));
-    }
-
-    @Override
-    public String statistic_show_player(String name, String statistic) {
-        return getMessage("statistic_show_player", true).replace("<name>", name).replace("<statistic>", statistic);
-    }
-
     @Override
     public String statistic_player_not_existent() {
         return getMessage("statistic_player_not_existent", true);
     }
 
-    public String statistic_show_player(String name, PlayerStatistic statistic) {
-        return statistic_show_player(name, statisticToString(statistic));
+    @Override
+    public String statistic_show_player(String name, String statistic) {
+        return getMessage("statistic_show_player", true).replace("<name>", name).replace("<statistic>", statistic);
     }
 
     @Override
@@ -725,10 +648,6 @@ public final class MessageManager extends Manager implements MessageContainer {
         return getMessage("statistic_top_slot_machine", true).replace("<category>", category).replace("<top>", top);
     }
 
-    public String statistic_top_slot_machine(Type category) {
-        return statistic_top_slot_machine(category.getRealName(plugin), slotMachineTopToString(category));
-    }
-
     @Override
     public String statistic_top_player_not_existent() {
         return getMessage("statistic_top_player_not_existent", true);
@@ -737,10 +656,6 @@ public final class MessageManager extends Manager implements MessageContainer {
     @Override
     public String statistic_top_player(String category, String top) {
         return getMessage("statistic_top_player", true).replace("<category>", category).replace("<top>", top);
-    }
-
-    public String statistic_top_player(Type category) {
-        return statistic_top_player(category.getRealName(plugin), playerTopToString(category));
     }
 
     @Override
@@ -786,10 +701,6 @@ public final class MessageManager extends Manager implements MessageContainer {
     @Override
     public String sign_pot_spacer(String colorCode) {
         return getMessage("sign_pot_spacer").replace("<color_code>", colorCode);
-    }
-
-    public String sign_pot_spacer() {
-        return sign_pot_spacer(randomColorCode());
     }
 
     @Override
@@ -850,5 +761,97 @@ public final class MessageManager extends Manager implements MessageContainer {
     @Override
     public String won_items() {
         return getMessage("won_items");
+    }
+
+    public String plugin_reloaded(long time) {
+        return plugin_reloaded(plugin.getDescription().getVersion(), time);
+    }
+
+    public String design_list() {
+        return design_list(designsToString(plugin.designManager.getDesigns()));
+    }
+
+    public String coin_purchase_not_enough_money(int coins, double price) {
+        return coin_purchase_not_enough_money(coins, price, price == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural());
+    }
+
+    public String coin_purchase(int coins, double price) {
+        return coin_purchase(coins, price, price == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural());
+    }
+
+    public String slot_machine_limited_usage() {
+        return slot_machine_limited_usage(Settings.getLimitedUsageAmount());
+    }
+
+    public String slot_machine_won(double money, ItemList items) {
+        String message = getMessage("slot_machine_won");
+        int index = message.indexOf("<items>");
+        String currency = "money";
+        if (VaultHook.isEnabled()) {
+            currency = money == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural();
+        }
+        return slot_machine_won(money, currency, items.size(), index == -1 ? "" : itemsToString(items, ChatColor.getLastColors(message.substring(0, index))));
+    }
+
+    public String slot_machine_list() {
+        return slot_machine_list(slotMachinesToString(plugin.slotMachineManager.getSlotMachines()));
+    }
+
+    public String slot_machine_money_pot_deposit(double money, String name, double pot) {
+        return slot_machine_money_pot_deposit(money, VaultHook.ECONOMY.currencyNamePlural(), name, pot);
+    }
+
+    public String slot_machine_money_pot_withdraw(double money, String name, double pot) {
+        return slot_machine_money_pot_withdraw(money, VaultHook.ECONOMY.currencyNamePlural(), name, pot);
+    }
+
+    public String slot_machine_money_pot_set(String name, double money) {
+        return slot_machine_money_pot_set(name, money, money == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural());
+    }
+
+    public String slot_machine_money_pot_reset(String name, double pot) {
+        return slot_machine_money_pot_reset(name, pot, pot == 1 ? VaultHook.ECONOMY.currencyNameSingular() : VaultHook.ECONOMY.currencyNamePlural());
+    }
+
+    public String slot_machine_item_pot_deposit(ItemStack item, String name) {
+        return slot_machine_item_pot_deposit(itemToString(item), name);
+    }
+
+    public String slot_machine_item_pot_deposit_multiple(ItemList items, String name) {
+        String message = getMessage("slot_machine_item_pot_deposit_multiple");
+        int index = message.indexOf("<items>");
+        return slot_machine_item_pot_deposit_multiple(index == -1 ? "" : itemsToString(items, ChatColor.getLastColors(message.substring(0, index))), name);
+    }
+
+    public String slot_machine_item_pot_set(String name, ItemList items) {
+        String message = getMessage("slot_machine_item_pot_set");
+        int index = message.indexOf("<items>");
+        return slot_machine_item_pot_set(name, index == -1 ? "" : itemsToString(items, ChatColor.getLastColors(message.substring(0, index))));
+    }
+
+    public String slot_machine_item_pot_reset(String name, ItemList items) {
+        String message = getMessage("slot_machine_item_pot_reset");
+        int index = message.indexOf("<items>");
+        return slot_machine_item_pot_reset(name, index == -1 ? "" : itemsToString(items, ChatColor.getLastColors(message.substring(0, index))));
+    }
+
+    public String statistic_show_slot_machine(String name, SlotMachineStatistic statistic) {
+        return statistic_show_slot_machine(name, statisticToString(statistic));
+    }
+
+    public String statistic_show_player(String name, PlayerStatistic statistic) {
+        return statistic_show_player(name, statisticToString(statistic));
+    }
+
+    public String statistic_top_slot_machine(Type category) {
+        return statistic_top_slot_machine(category.getRealName(plugin), slotMachineTopToString(category));
+    }
+
+    public String statistic_top_player(Type category) {
+        return statistic_top_player(category.getRealName(plugin), playerTopToString(category));
+    }
+
+    public String sign_pot_spacer() {
+        return sign_pot_spacer(randomColorCode());
     }
 }
