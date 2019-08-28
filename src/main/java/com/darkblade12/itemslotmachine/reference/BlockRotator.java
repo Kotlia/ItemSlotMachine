@@ -57,17 +57,13 @@ final class BlockRotator {
             case ACACIA_FENCE_GATE:
             case ACACIA_STAIRS:
             case ACACIA_TRAPDOOR:
-            case ACACIA_WALL_SIGN:
-            case ANDESITE_STAIRS:
+            case WALL_SIGN:
             case ANVIL:
-            case BARREL:
             case BIRCH_BUTTON:
             case BIRCH_FENCE_GATE:
             case BIRCH_STAIRS:
             case BIRCH_TRAPDOOR:
-            case BIRCH_WALL_SIGN:
             case BLACK_BED:
-            case BLAST_FURNACE:
             case BLUE_BED:
             case BRICK_STAIRS:
             case BROWN_BED:
@@ -82,15 +78,11 @@ final class BlockRotator {
             case DARK_OAK_FENCE_GATE:
             case DARK_OAK_STAIRS:
             case DARK_OAK_TRAPDOOR:
-            case DARK_OAK_WALL_SIGN:
             case DARK_PRISMARINE_STAIRS:
-            case DIORITE_STAIRS:
             case DISPENSER:
             case DROPPER:
-            case END_STONE_BRICK_STAIRS:
             case ENDER_CHEST:
             case FURNACE:
-            case GRANITE_STAIRS:
             case GRAY_BED:
             case GREEN_BED:
             case HOPPER:
@@ -99,54 +91,39 @@ final class BlockRotator {
             case JUNGLE_FENCE_GATE:
             case JUNGLE_STAIRS:
             case JUNGLE_TRAPDOOR:
-            case JUNGLE_WALL_SIGN:
             case LADDER:
             case LEVER:
             case LIGHT_BLUE_BED:
             case LIGHT_GRAY_BED:
             case LIME_BED:
-            case LOOM:
             case MAGENTA_BED:
-            case MOSSY_COBBLESTONE_STAIRS:
-            case MOSSY_STONE_BRICK_STAIRS:
             case MOVING_PISTON:
             case NETHER_BRICK_STAIRS:
             case OAK_BUTTON:
             case OAK_FENCE_GATE:
             case OAK_STAIRS:
             case OAK_TRAPDOOR:
-            case OAK_WALL_SIGN:
             case ORANGE_BED:
             case PINK_BED:
             case PISTON:
             case PISTON_HEAD:
-            case POLISHED_ANDESITE_STAIRS:
-            case POLISHED_DIORITE_STAIRS:
-            case POLISHED_GRANITE_STAIRS:
             case PRISMARINE_BRICK_STAIRS:
             case PRISMARINE_STAIRS:
             case PUMPKIN:
             case PURPLE_BED:
             case PURPUR_STAIRS:
             case QUARTZ_STAIRS:
-            case RED_NETHER_BRICK_STAIRS:
             case RED_SANDSTONE_STAIRS:
             case REDSTONE_TORCH:
             case REPEATER:
             case SANDSTONE_STAIRS:
-            case SMOKER:
-            case SMOOTH_QUARTZ_STAIRS:
-            case SMOOTH_RED_SANDSTONE_STAIRS:
-            case SMOOTH_SANDSTONE_STAIRS:
             case SPRUCE_BUTTON:
             case SPRUCE_FENCE_GATE:
             case SPRUCE_STAIRS:
             case SPRUCE_TRAPDOOR:
-            case SPRUCE_WALL_SIGN:
             case STICKY_PISTON:
             case STONE_BRICK_STAIRS:
             case STONE_BUTTON:
-            case STONE_STAIRS:
             case TORCH:
             case TRAPPED_CHEST:
             case TRIPWIRE_HOOK:
@@ -197,12 +174,7 @@ final class BlockRotator {
                     }
                 }
                 return door;
-            case OAK_SIGN:
-            case DARK_OAK_SIGN:
-            case SPRUCE_SIGN:
-            case BIRCH_SIGN:
-            case JUNGLE_SIGN:
-            case ACACIA_SIGN:
+            case SIGN:
             case SKELETON_SKULL:
             case PLAYER_HEAD:
             case CREEPER_HEAD:

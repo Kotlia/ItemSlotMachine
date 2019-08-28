@@ -1,12 +1,11 @@
 package com.darkblade12.itemslotmachine.reference;
 
 import com.darkblade12.itemslotmachine.util.ReflectionUtil;
-import net.minecraft.server.v1_14_R1.BlockPosition;
-import net.minecraft.server.v1_14_R1.EntityItemFrame;
-import net.minecraft.server.v1_14_R1.EnumDirection;
-import net.minecraft.server.v1_14_R1.World;
+import net.minecraft.server.v1_13_R2.BlockPosition;
+import net.minecraft.server.v1_13_R2.EntityItemFrame;
+import net.minecraft.server.v1_13_R2.EnumDirection;
+import net.minecraft.server.v1_13_R2.World;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 

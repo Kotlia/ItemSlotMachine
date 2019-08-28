@@ -7,7 +7,6 @@ import com.darkblade12.itemslotmachine.reference.*;
 import com.darkblade12.itemslotmachine.settings.Settings;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
@@ -29,6 +28,7 @@ public final class Design implements Nameable {
     private final ReferenceBlock slot;
     private final ReferenceCuboid region;
     private final Direction initialDirection;
+    private final List<Material> AIR = Arrays.asList(Material.AIR, Material.CAVE_AIR, Material.VOID_AIR);
 
     private Design(String name, Set<ReferenceBlock> blocks, ReferenceItemFrame[] itemFrames, ReferenceBlock sign, ReferenceBlock slot, ReferenceCuboid region, Direction initialDirection) {
         this.name = name;
@@ -50,7 +50,7 @@ public final class Design implements Nameable {
         int f = 0;
         for (Block b : c) {
             Material m = b.getType();
-            if (Tag.SIGNS.isTagged(m) && sign == null) {
+            if ((m.equals(Material.SIGN) || m.equals(Material.WALL_SIGN)) && sign == null) {
                 sign = ReferenceBlock.fromBukkitBlock(p, b);
             } else if (m == Material.JUKEBOX && slot == null) {
                 slot = ReferenceBlock.fromBukkitBlock(p, b);
@@ -99,8 +99,6 @@ public final class Design implements Nameable {
         itemFrames[2] = r;
         saveToFile();
     }
-
-    private final List<Material> AIR = Arrays.asList(Material.AIR, Material.CAVE_AIR, Material.VOID_AIR);
 
     public void build(Location c, Direction d) throws Exception {
         if (Settings.isSpaceCheckEnabled()) {
