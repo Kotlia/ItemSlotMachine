@@ -49,7 +49,9 @@ public final class SignUpdater {
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];
             lines[i] = line.length() > 16 ? line.substring(0, 16) : line;
-            System.out.println("After Line " + i + ":" + lines[i]);
+            if (Settings.isDebugModeEnabled()) {
+                System.out.println("After Line " + i + ":" + lines[i]);
+            }
         }
         return lines;
     }

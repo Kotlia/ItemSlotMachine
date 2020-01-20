@@ -164,7 +164,9 @@ public final class MessageManager extends Manager implements MessageContainer {
             return "§cMessage not available, please check your language file! §8(§7Message name: §6" + name + "§8)";
         }
         String message = messages.get(name);
-        System.out.println("Message :" + message);
+        if (Settings.isDebugModeEnabled()) {
+            System.out.println("Message :" + message);
+        }
         return message;
     }
 
