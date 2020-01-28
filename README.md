@@ -1,4 +1,5 @@
-<p>Plugin originally written and coded by DarkBlade12, updated to Spigot / Paper 1.14.1 by eccentricdevotion.</p>
+<p>Plugin originally written and coded by DarkBlade12, updated to Spigot / Paper 1.14.4 by eccentricdevotion.</p>
+<p></p>
 <h3>What is it?</h3>
 <p>
 ItemSlotMachine adds realistic slot machines to your server that have a display which consists of item frames, make sounds when active and can be deactivated either manually or automatically. In order to activate a slot machine you have to hold the coin item in your hand and right click the slot of a slot machine. Everything is highly customisable!
