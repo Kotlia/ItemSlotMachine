@@ -1,4 +1,6 @@
 <p>Plugin originally written and coded by DarkBlade12, updated to Spigot / Paper 1.14.4 by eccentricdevotion.</p>
+<p> 1.15.2対応日本語版 by takatronix</p>
+</p>
 <p></p>
 <h3>What is it?</h3>
 <p>
@@ -30,44 +32,45 @@ ItemSlotMachine adds realistic slot machines to your server that have a display 
 <h3>Commands & Permissions</h3>
 <p>
 
+
 | Command | Description | Permission |
 | ------------- | ------------- | ------------- |
 | /design wand | Gives you the design wand | ItemSlotMachine.design.wand |
 | /design create <name>  | Creates a new design from your selection | ItemSlotMachine.design.create |
-| /design remove <name> | Removes an existing design | ItemSlotMachine.design.remove | 
-| /design list | Shows a list of available designs | ItemSlotMachine.design.list | 
-| /design invert <name> | Inverts the item frame loading sequence of a design | ItemSlotMachine.design.invert | 
-| /design reload | Reloads all designs | ItemSlotMachine.design.reload | 
-| /design help <page> | Shows the help pages for the design command | - | 
-| /coin purchase <amount> | Allows you to purchase coins | ItemSlotMachine.coin.purchase | 
-| /coin grant <player> <amount> | Grants a player an amount of coins | ItemSlotMachine.coin.grant | 
-| /coin help [page] | Shows the help pages for the coin command | - | 
-| /slot build <design> [name] | Builds a new slot machine of a design | ItemSlotMachine.slot.build | 
-| /slot destruct <name> | Destructs an existing slot machine | ItemSlotMachine.slot.destruct | 
-| /slot list | Shows a list of available slot machines | ItemSlotMachine.slot.list | 
-| /slot tp <name> | Teleports you to a slot machine | ItemSlotMachine.slot.tp | 
-| /slot rebuild <name> | Deactivates and rebuilds an existing slot machine | ItemSlotMachine.slot.rebuild | 
-| /slot move <name> <amount> | Moves a slot machine into your looking direction by an amount | ItemSlotMachine.slot.move | 
-| /slot deactivate <name> | Deactivates an active slot machine | ItemSlotMachine.slot.deactivate | 
-| /slot money <name> <deposit/withdraw/set> <amount> | Modifies the money pot of a slot machine | ItemSlotMachine.slot.money | 
-| /slot item <name> <deposit/set> <hand/items> | Modifies the item pot of a slot machine | ItemSlotMachine.slot.item | 
-| /slot reset <name> <money/item> | Resets a pot of a slot machine | ItemSlotMachine.slot.reset | 
-| /slot clear <name> <money/item> | Clears a pot of a slot machine | ItemSlotMachine.slot.clear | 
-| /slot reload <name> | Reloads the whole plugin or a single slot machine | ItemSlotMachine.slot.reload | 
-| /slot help <page> | Shows the help pages for the slot command | - | 
-| /statistic show <slot/player> <name> | Shows the statistic of a slot machine or a player | ItemSlotMachine.statistic.show | 
-| /statistic top <slot/player> <category> | Shows the top ten statistics for a category for slot machines or players | ItemSlotMachine.statistic.top | 
-| /statistic reset <slot/player> <name> | Resets the statistic of a slot machine or a player | ItemSlotMachine.statistic.reset | 
-| /statistic help <page> | Shows the help pages for the statistic command | - | 
-| - | All ItemSlotMachine permissions | ItemSlotMachine.* | 
-| - | All design permissions | ItemSlotMachine.design.* | 
-| - | All coin permissions | ItemSlotMachine.coin.* | 
-| - | All slot machine permissions | ItemSlotMachine.slot.* | 
-| - | All slot machine modify permissions | ItemSlotMachine.slot.modify.* | 
-| - | All statistic permissions | ItemSlotMachine.statistic.* | 
-| - | Check the name of a slot machine by right clicking it | ItemSlotMachine.slot.check | 
-| - | Use a slot machine | ItemSlotMachine.slot.use | 
-| - | Modify a specific slot machine | ItemSlotMachine.slot.modify.<name> | 
+| /design remove <name> | Removes an existing design | ItemSlotMachine.design.remove |
+| /design list | Shows a list of available designs | ItemSlotMachine.design.list |
+| /design invert <name> | Inverts the item frame loading sequence of a design | ItemSlotMachine.design.invert |
+| /design reload | Reloads all designs | ItemSlotMachine.design.reload |
+| /design help <page> | Shows the help pages for the design command | - |
+| /coin purchase <amount> | Allows you to purchase coins | ItemSlotMachine.coin.purchase |
+| /coin grant <player> <amount> | Grants a player an amount of coins | ItemSlotMachine.coin.grant |
+| /coin help [page] | Shows the help pages for the coin command | - |
+| /slot build <design> [name] | Builds a new slot machine of a design | ItemSlotMachine.slot.build |
+| /slot destruct <name> | Destructs an existing slot machine | ItemSlotMachine.slot.destruct |
+| /slot list | Shows a list of available slot machines | ItemSlotMachine.slot.list |
+| /slot tp <name> | Teleports you to a slot machine | ItemSlotMachine.slot.tp |
+| /slot rebuild <name> | Deactivates and rebuilds an existing slot machine | ItemSlotMachine.slot.rebuild |
+| /slot move <name> <amount> | Moves a slot machine into your looking direction by an amount | ItemSlotMachine.slot.move |
+| /slot deactivate <name> | Deactivates an active slot machine | ItemSlotMachine.slot.deactivate |
+| /slot money <name> <deposit/withdraw/set> <amount> | Modifies the money pot of a slot machine | ItemSlotMachine.slot.money |
+| /slot item <name> <deposit/set> <hand/items> | Modifies the item pot of a slot machine | ItemSlotMachine.slot.item |
+| /slot reset <name> <money/item> | Resets a pot of a slot machine | ItemSlotMachine.slot.reset |
+| /slot clear <name> <money/item> | Clears a pot of a slot machine | ItemSlotMachine.slot.clear |
+| /slot reload <name> | Reloads the whole plugin or a single slot machine | ItemSlotMachine.slot.reload |
+| /slot help <page> | Shows the help pages for the slot command | - |
+| /statistic show <slot/player> <name> | Shows the statistic of a slot machine or a player | ItemSlotMachine.statistic.show |
+| /statistic top <slot/player> <category> | Shows the top ten statistics for a category for slot machines or players | ItemSlotMachine.statistic.top |
+| /statistic reset <slot/player> <name> | Resets the statistic of a slot machine or a player | ItemSlotMachine.statistic.reset |
+| /statistic help <page> | Shows the help pages for the statistic command | - |
+| - | All ItemSlotMachine permissions | ItemSlotMachine.* |
+| - | All design permissions | ItemSlotMachine.design.* |
+| - | All coin permissions | ItemSlotMachine.coin.* |
+| - | All slot machine permissions | ItemSlotMachine.slot.* |
+| - | All slot machine modify permissions | ItemSlotMachine.slot.modify.* |
+| - | All statistic permissions | ItemSlotMachine.statistic.* |
+| - | Check the name of a slot machine by right clicking it | ItemSlotMachine.slot.check |
+| - | Use a slot machine | ItemSlotMachine.slot.use |
+| - | Modify a specific slot machine | ItemSlotMachine.slot.modify.<name> |
 </p>
 <h3>Config</h3>
 <p>
