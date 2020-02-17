@@ -42,6 +42,9 @@ public final class ItemSlotMachine extends JavaPlugin {
         l = getLogger();
         settings = new Settings(this);
         try {
+            saveResource("lang_DE.txt",false);
+            saveResource("lang_EN.txt",false);
+            saveResource("lang_JP.txt",false);
             settings.load();
         } catch (Exception e) {
             l.warning("An error occurred while loading the settings from config.yml, plugin will disable! Cause: " + e.getMessage());
