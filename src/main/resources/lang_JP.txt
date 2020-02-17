@@ -1,0 +1,195 @@
+﻿#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+# English language file (Englisch)                                #
+# All of these messages can be customised to your heart's content #
+# Message format: <name>=<message>                                #
+#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+
+#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+# Plugin messages and message parts #
+#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+
+plugin_prefix=&7&l[&e&lMan10&f&lSlot&7&l] &r
+plugin_reloaded=&7再読み込みをしました. PluginVersion:<version> (<time> ms)
+
+#=#=#=#=#=#=#=#=#=#=#
+# Command messages  #
+#=#=#=#=#=#=#=#=#=#=#
+
+command_no_permission=&cあなたは権限を持っていない.
+command_no_console_executor=&cこのコマンドはコンソールから実行することはできない!
+command_invalid_usage=&c無効な使用法!\n&6<usage>
+
+#=#=#=#=#=#=#=#=#=#=#=#=#
+# Description messages  #
+#=#=#=#=#=#=#=#=#=#=#=#=#
+
+description_design_wand=デザインの杖を与えます.
+description_design_create=選択範囲を新しいデザインとして登録しました.
+description_design_remove=既存のデザインを削除します.
+description_design_list=利用可能なデザイン一覧を表示します.
+description_design_invert=デザインのアイテムフレームロードシーケンスを反転.
+description_design_reload=全てのデザインを再読み込みします.
+description_design_help=スロットのデザインに関するヘルプを表示します.
+description_coin_purchase=スロット用のコインを購入します.
+description_coin_grant=他のプレイヤーへコインを送ります
+description_coin_help=スロットのコインに関するヘルプを表示します.
+description_slot_build=デザインを元にスロットを設置します
+description_slot_destruct=すでに設置してあるスロットを解体します.
+description_slot_list=利用可能なスロットのリストを表示します.
+description_slot_tp=指定したスロットの位置までテレポートします.
+description_slot_rebuild=すでに設置してあるスロットを待機状態にしたうえで再構築します.
+description_slot_move=スロットの設置位置を移動させます.
+description_slot_deactivate=使用中のスロットを待機状態にします.
+description_slot_money=スロットのジャックポットに入ってるコインを編集します.
+description_slot_item=スロットのポットの中に入っているアイテムを編集します.
+description_slot_reset=ポットをリセットさせます.
+description_slot_clear=ポットを空にします.
+description_slot_reload=プラグイン全体もしくはスロット単体を再読み込みします.
+description_slot_help=スロットのコマンド一覧を表示します.
+description_statistic_show=スロットもしくはプレイヤーの統計を表示します
+description_statistic_top=スロットもしくはプレイヤーの統計のトップ１０を表示します
+description_statistic_reset=スロットもしくはプレイヤの統計をリセットします
+description_statistic_help=スロットの統計に関するヘルプを表示します
+
+#=#=#=#=#=#=#=#=#=#=#=#
+# Help page messages  #
+#=#=#=#=#=#=#=#=#=#=#=#
+
+help_page_header=&eHelp page for the &6<label> &ecommand:
+help_page_footer=&8&m--------------------&8[&7Page <current_page> &7of &6&l<page_amount>&8]&m---------------------
+help_page_command_format=&a\u2022 <command>\n  &7\u25BB <description>\n  &7\u25BB Executable as Console: &2<executable_as_console>\n  &7\u25BB Permission: &2<permission>
+help_page_not_existent=&6<page> &cページ目はありません!
+
+#=#=#=#=#=#=#=#=#=#
+# Player messages #
+#=#=#=#=#=#=#=#=#=#
+
+player_not_enough_space=&eインベントリに十分な空きがありません!
+player_not_enough_space_other=&cそのプレイヤーのインベントリに十分な空きがありません!
+player_not_existent=&cそのプレイヤーはまだスロットで遊んだことがないようだ
+player_no_item_in_hand=&c手にコインを持っていない！
+
+#=#=#=#=#=#=#=#=#=#
+# Design messages #
+#=#=#=#=#=#=#=#=#=#
+
+design_wand_name=&eデザイン &e杖
+design_wand_lore=&e左クリックでファーストポイントを設定.\n&e右クリックでラストポイントを設定.
+design_wand_got=&aあなたは既にデザイン杖を持っている, 正しい使用法を確認するために説明文を読んで下さい!
+design_wand_first_position_selected=&2ファーストポイントを設定しました.\n&8(&e<x>&a, &e<y>&a, &e<z> &ain world &e<world>&8)
+design_wand_second_position_selected=&2ラストポイントを設定しました.\n&8(&e<x>&a, &e<y>&a, &e<z> &ain world &e<world>&8)
+design_already_existent=&cそのデザイン名は既に使用されています!
+design_not_existent=&cそのデザイン名は存在しない!
+design_invalid_selection=&c選択範囲が無効になっています, 同じ世界に2つのポイントを設定して下さい!
+design_creation_failure=&cデザインの作成に失敗しました! 理由: &e<cause>
+design_creation_success=&6<name>&aは正常に作成されました.
+design_removal=&6<name>&aは削除されました.
+design_list=&a使用可能なデザイン: <list>
+design_not_modifiable=&cこのデザインは変更できない!
+design_inversion=&aThe item frame loading sequence of design &6<name> &awas inverted.
+design_reload=&aすべてのデザインが再読み込みされた.
+
+#=#=#=#=#=#=#=#=#
+# Coin messages #
+#=#=#=#=#=#=#=#=#
+
+coin_name=&9&l&kfef&8&l5K&6&lSlot&e&lCoin&9&l&kfef&f&7&o($5,000)
+coin_lore=&d●&f●&a● &7&lMan10 &6&lCasino &d●&f●&a●\n&e&lRight Click the slot while holding coin in your hand\n&f&lコインを持ってスロットを右クリック
+coin_purchase_disabled=&cVaultがインストールされていないのでコインの購入が無効になっています!
+coin_purchase_not_enough_money=&e<coins> &aコインを購入するための &e<price><currency_name> &aドルを持っていない!
+coin_purchase=&e<coins> &aコインを &e<price><currency_name> &aドルで購入しました.
+coin_grant_self=&aあなたは &6<coins> &aコイン獲得しました.
+coin_grant_sender=&aあなたは &6<player>さんへ &e<coins> &aコイン送りました.
+coin_grant_receiver=&e<sender>&aさんは あなたへ &6<coins> &aコイン送りました.
+
+#=#=#=#=#=#=#=#=#=#=#=#=#
+# Slot machine messages #
+#=#=#=#=#=#=#=#=#=#=#=#=#
+
+slot_machine_modifying_not_allowed=&cあなたはこのスロットを編集するとこはできません.
+slot_machine_clicked=&aこのスロットの名前は &6<name>&a です.
+slot_machine_usage_not_allowed=&cあなたはこのスロットをご利用いただけません.
+slot_machine_broken=&cこのスロットは使用中もしくは故障中です!
+slot_machine_still_active=&cこのスロットは使用中です!
+slot_machine_creative_not_allowed=&cクリエイティブモードではこのスロット使用できません
+slot_machine_not_enough_coins=&cコイン不足のためこのスロットを使用できません! &8(&e<coins>&8)
+slot_machine_limited_usage=&c一度に使用できるスロットは &6<amount> &c台までです!
+slot_machine_locked=&cThis slot machine is still locked to &6<player>&c. &8(&e<seconds> seconds&8)
+slot_machine_won=&6おめでとうございます!  &a<money> <currency_name> &6と &a<item_amount> 個の <items>&6が当たりました.
+slot_machine_lost=&c何も獲得できなかった...
+slot_machine_already_existent=&cこのスロットはすでに存在します
+slot_machine_not_existent=&cこのスロットは存在しません
+slot_machine_building_failure=&cスロットマシーンの設置に失敗しました! エラーメッセージ: &6<cause>
+slot_machine_building_success=&aスロットマシーン &6[<name>]&aは無事に設置されました.
+slot_machine_destruction=&aスロットマシーン &6<name>&aは無事に撤去されました.
+slot_machine_list_empty=&cスロットマシーンが一つもありません！
+slot_machine_list=&a利用可能なスロットリスト: <list>
+slot_machine_teleportation_failure=&cスロットマシーン &6<name> &cへのテレポートに失敗しました。 エラーメッセージ: &6<cause>
+slot_machine_teleportation_success=&aスロットマシーン &6<name>&aへテレポートしました.
+slot_machine_rebuilding=&aスロットマシーン &6<name> &aをリビルドしました.
+slot_machine_moving_failure=&cスロットマシーンの移動に失敗しました! エラーメッセージ: &6<cause>
+slot_machine_moving_success=&aスロットマシーン &6<name>&aの移動に成功しました.
+slot_machine_not_active=&cこのスロットマシーンは使用中ではありません!
+slot_machine_deactivation=&aスロットマシーン &6<name> &aを待機状態にしました.
+slot_machine_money_pot_not_enabled=&cこのスロットマシーンのポットは利用できません!
+slot_machine_money_pot_empty=&cこのスロットマシーンのポットは空です!
+slot_machine_money_pot_deposit=&6<money> <currency_name> &aが &e<name>&aへディポジットされました. &8(&7New money pot: &2<pot> <currency_name>&8)
+slot_machine_money_pot_withdraw=&6<money> <currency_name> &aが &e<name>&aから取り除かれました. &8(&7New money pot: &2<pot> <currency_name>&8)
+slot_machine_money_pot_set=&6<name> &aのポットが &e<money> <currency_name>&aにセットされました.
+slot_machine_money_pot_reset=&6<name> &aのポットがリセットされました. &8(&7New money pot: &2<pot> <currency_name>&8)
+slot_machine_money_pot_clear=&6<name> &aのポットを空にしました.
+slot_machine_item_pot_not_enabled=&cこのアイテムポットは有効ではありません
+slot_machine_item_pot_empty=&cこのアイテムポットは空です
+slot_machine_item_pot_invalid_item_list=&cポットのアイテムは不正です。エラーメッセージ： <cause>!
+slot_machine_item_pot_deposit=&e<name>&aのアイテムポットへ&6<item> &aが投入されました.
+slot_machine_item_pot_deposit_multiple=&e<name>&aのアイテムポットへ&6<items> &aが投入されました.
+slot_machine_item_pot_set=&6<name> &aのアイテムポットを&e<items>&aにセットしました.
+slot_machine_item_pot_reset=&6<name> &aのアイテムポットをリセットしました。現在のポットの中には&e<items>&aが入っています.
+slot_machine_item_pot_clear=&6<name> &aのアイテムポットを空にしました.
+slot_machine_reload_failure=&cスロットマシーンのリロードに失敗しました! エラーメッセージ: &6<cause>
+slot_machine_reload=&6<name> &aはリロードされました.
+
+#=#=#=#=#=#=#=#=#=#=#=#
+# Statistic messages  #
+#=#=#=#=#=#=#=#=#=#=#=#
+
+statistic_show_slot_machine=&6<name>&aの統計情報: <statistic>
+statistic_player_not_existent=&cこのプレイヤーはスロットを利用したことがないみたい...
+statistic_show_player=&6<name>&aの統計情報: <statistic>
+statistic_top_category_not_existent=&cカテゴリが存在しません!
+statistic_top_slot_machine_invalid_category=&cこのカテゴリはスロットマシーンの統計にはそんざいしません
+statistic_top_slot_machine_not_existent=&cこのカテゴリの上位スロットマシーンはありません yet!
+statistic_top_slot_machine=&6<category>&aカテゴリのトップ&210 &aスロットマシーン&a: <top>
+statistic_top_player_not_existent=&cこのカテゴリーにはトップ１０のプレイヤーが居ません！チャンス！
+statistic_top_player=&6<category>&aカテゴリのトップ &210 &aプレイヤー &6<category>&a: <top>
+statistic_reset_slot_machine=&aスロットマシーン&6<name> &aの統計がリセットされました.
+statistic_reset_player=&6<name> &aさんの統計がリセットされました.
+
+#=#=#=#=#=#=#=#=#=#
+# Sign lettering  #
+#=#=#=#=#=#=#=#=#=#
+
+sign_coin_shop_header=&8&l[CoinShop]
+sign_coin_shop_coins=&bCoins: &3<coins>
+sign_coin_shop_price=&9Price: &1<price>
+sign_coin_shop_spacer=&8&m-----------
+sign_pot_money=&eMoney: &6<money>
+sign_pot_items=&7Items: &c<items>
+sign_pot_spacer=<color_code>&m-----------
+
+#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+# Miscellaneous messages and message parts  #
+#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+
+input_not_numeric=&6<input> &cisn't numeric!
+lower_than_number=lower than <number>
+equals_number=equals <number>
+higher_than_number=higher than <number>
+invalid_amount=&cThe entered amount is invalid! &8(&6<cause>&8)
+and=and
+total_spins=Total Spins
+won_spins=Won Spins
+lost_spins=Lost Spins
+coins_spent=Coins Spent
+won_money=Won Money
+won_items=Won Items
