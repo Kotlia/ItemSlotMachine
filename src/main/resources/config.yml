@@ -11,7 +11,7 @@ General_Settings:
   # This is the ending of the language file name that will be loaded
   # ItemSlotMachine will attempt to load 'lang_<name>.txt'
   # Built-in names are 'EN' for English and 'DE' for German
-  Language_Name: EN
+  Language_Name: JP
 
 # This section contains general slot machine settings
 Slot_Machine_Settings:
