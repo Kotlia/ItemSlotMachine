@@ -1,5 +1,2 @@
 Manifest-Version: 1.0
-Class-Path: spigot-api-1.15.2-R0.1-20200212.220918-52.jar commons-lang-2
- .6.jar guava-21.0.jar gson-2.8.0.jar spigot-1.15.2.jar Vault.jar bungee
- cord-chat-1.15-20200214.025957-52.jar snakeyaml-1.25.jar
-
+Class-Path: spigot-api-1.16.1-R0.jar Vault.jar 
