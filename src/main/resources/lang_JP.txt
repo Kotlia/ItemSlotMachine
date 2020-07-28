@@ -8,16 +8,16 @@
 # Plugin messages and message parts #
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
-plugin_prefix=&7&l[&e&lMan10&f&lSlot&7&l] &r
+plugin_prefix=&7&l[ &3&lOyasai&f&lCasino &7&l] &r
 plugin_reloaded=&7再読み込みをしました. PluginVersion:<version> (<time> ms)
 
 #=#=#=#=#=#=#=#=#=#=#
 # Command messages  #
 #=#=#=#=#=#=#=#=#=#=#
 
-command_no_permission=&cあなたは権限を持っていない.
-command_no_console_executor=&cこのコマンドはコンソールから実行することはできない!
-command_invalid_usage=&c無効な使用法!\n&6<usage>
+command_no_permission=&c権限がありません.
+command_no_console_executor=&cこのコマンドをコンソールから実行することは出来ません.
+command_invalid_usage=&c無効な使用法です.\n&6<usage>
 
 #=#=#=#=#=#=#=#=#=#=#=#=#
 # Description messages  #
@@ -67,7 +67,7 @@ help_page_not_existent=&6<page> &cページ目はありません!
 player_not_enough_space=&eインベントリに十分な空きがありません!
 player_not_enough_space_other=&cそのプレイヤーのインベントリに十分な空きがありません!
 player_not_existent=&cそのプレイヤーはまだスロットで遊んだことがないようだ
-player_no_item_in_hand=&c手にコインを持っていない！
+player_no_item_in_hand=&c手にコインを持っていません!
 
 #=#=#=#=#=#=#=#=#=#
 # Design messages #
@@ -75,17 +75,17 @@ player_no_item_in_hand=&c手にコインを持っていない！
 
 design_wand_name=&eデザイン &e杖
 design_wand_lore=&e左クリックでファーストポイントを設定.\n&e右クリックでラストポイントを設定.
-design_wand_got=&aあなたは既にデザイン杖を持っている, 正しい使用法を確認するために説明文を読んで下さい!
+design_wand_got=&aあなたは既にデザイン杖を持っています. 正しい使用法を確認するために説明文を読んで下さい!
 design_wand_first_position_selected=&2ファーストポイントを設定しました.\n&8(&e<x>&a, &e<y>&a, &e<z> &ain world &e<world>&8)
 design_wand_second_position_selected=&2ラストポイントを設定しました.\n&8(&e<x>&a, &e<y>&a, &e<z> &ain world &e<world>&8)
 design_already_existent=&cそのデザイン名は既に使用されています!
-design_not_existent=&cそのデザイン名は存在しない!
+design_not_existent=&cそのデザイン名は存在しません.
 design_invalid_selection=&c選択範囲が無効になっています, 同じ世界に2つのポイントを設定して下さい!
 design_creation_failure=&cデザインの作成に失敗しました! 理由: &e<cause>
 design_creation_success=&6<name>&aは正常に作成されました.
 design_removal=&6<name>&aは削除されました.
 design_list=&a使用可能なデザイン: <list>
-design_not_modifiable=&cこのデザインは変更できない!
+design_not_modifiable=&cこのデザインは変更できません.
 design_inversion=&aThe item frame loading sequence of design &6<name> &awas inverted.
 design_reload=&aすべてのデザインが再読み込みされた.
 
@@ -93,11 +93,11 @@ design_reload=&aすべてのデザインが再読み込みされた.
 # Coin messages #
 #=#=#=#=#=#=#=#=#
 
-coin_name=&9&l&kfef&8&l5K&6&lSlot&e&lCoin&9&l&kfef&f&7&o($5,000)
-coin_lore=&d●&f●&a● &7&lMan10 &6&lCasino &d●&f●&a●\n&e&lRight Click the slot while holding coin in your hand\n&f&lコインを持ってスロットを右クリック
+coin_name=&9&l&kfef&8&l5K&6&lSlot&e&lCoin&9&l&kfef&f&7&o(¥5,000)
+coin_lore=&b&l○▽ カジノ専用通貨 (Casino Only)▽○\n\n&f&lコインを持ってスロットを右クリック\n&e&7Right Click the slot while holding coin in your hand
 coin_purchase_disabled=&cVaultがインストールされていないのでコインの購入が無効になっています!
-coin_purchase_not_enough_money=&e<coins> &aコインを購入するための &e<price><currency_name> &aドルを持っていない!
-coin_purchase=&e<coins> &aコインを &e<price><currency_name> &aドルで購入しました.
+coin_purchase_not_enough_money=&e<coins> &aコインを購入するための &e<price><currency_name> &a円を持っていません!
+coin_purchase=&e<coins> &aコインを &e<price><currency_name> &a円で購入しました.
 coin_grant_self=&aあなたは &6<coins> &aコイン獲得しました.
 coin_grant_sender=&aあなたは &6<player>さんへ &e<coins> &aコイン送りました.
 coin_grant_receiver=&e<sender>&aさんは あなたへ &6<coins> &aコイン送りました.
@@ -116,7 +116,7 @@ slot_machine_not_enough_coins=&cコイン不足のためこのスロットを使
 slot_machine_limited_usage=&c一度に使用できるスロットは &6<amount> &c台までです!
 slot_machine_locked=&cThis slot machine is still locked to &6<player>&c. &8(&e<seconds> seconds&8)
 slot_machine_won=&6おめでとうございます!  &a<money> <currency_name> &6と &a<item_amount> 個の <items>&6が当たりました.
-slot_machine_lost=&c何も獲得できなかった...
+slot_machine_lost=&cはずれ！
 slot_machine_already_existent=&cこのスロットはすでに存在します
 slot_machine_not_existent=&cこのスロットは存在しません
 slot_machine_building_failure=&cスロットマシーンの設置に失敗しました! エラーメッセージ: &6<cause>
@@ -157,7 +157,7 @@ statistic_show_slot_machine=&6<name>&aの統計情報: <statistic>
 statistic_player_not_existent=&cこのプレイヤーはスロットを利用したことがないみたい...
 statistic_show_player=&6<name>&aの統計情報: <statistic>
 statistic_top_category_not_existent=&cカテゴリが存在しません!
-statistic_top_slot_machine_invalid_category=&cこのカテゴリはスロットマシーンの統計にはそんざいしません
+statistic_top_slot_machine_invalid_category=&cこのカテゴリはスロットマシーンの統計には存在しません
 statistic_top_slot_machine_not_existent=&cこのカテゴリの上位スロットマシーンはありません yet!
 statistic_top_slot_machine=&6<category>&aカテゴリのトップ&210 &aスロットマシーン&a: <top>
 statistic_top_player_not_existent=&cこのカテゴリーにはトップ１０のプレイヤーが居ません！チャンス！
