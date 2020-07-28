@@ -9,7 +9,7 @@ ItemSlotMachine は Minecraft Server 内にリアルなスロットマシンを�
 </p>
 <h3>機能</h3>
 <ul>
-	<li>Vault 対応。</li>
+	<li><b>Vault 対応。</b></li>
 	<li>オリジナルデザインを作成することが可能です</li>
 	<li>Reload無しで新デザインを追加出来ます</li>
 	<li>デザインの数に制限はありません</li>
